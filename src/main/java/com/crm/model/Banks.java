@@ -1,0 +1,35 @@
+package com.crm.model;
+
+import org.hibernate.annotations.Table;
+import java.io.Serializable;
+import javax.persistence.*;
+
+@Entity
+@Table(name = "banks", schema = "public", catalog = "crm")
+public class Banks implements Serializable {
+    private Integer id;
+    private String name;
+
+    @Id
+    @GeneratedValue(generator = "banks_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "banks_seq", sequenceName = "banks_id_seq", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY) // Старый вариант
+    @Column(name = "id", nullable = false)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Basic
+    @Column(name = "name", nullable = false, length = 50)
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
