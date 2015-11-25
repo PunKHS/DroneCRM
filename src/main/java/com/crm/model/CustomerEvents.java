@@ -1,6 +1,5 @@
 package com.crm.model;
 
-import org.hibernate.annotations.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import javax.persistence.*;
@@ -18,42 +17,42 @@ public class CustomerEvents implements Serializable {
     @Id
     @GeneratedValue(generator = "customer_events_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "customer_events_seq", sequenceName = "customer_events_id_seq", allocationSize = 1)
-    @Column(name = "id", nullable = false)
-    public id getId() {
+    @Column(name = "id", unique = true, nullable = false)
+    public int getId() {
         return id;
     }
 
-    public void setId(id id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "contacts_id", nullable = false)
-    public id getContactsId() {
+    public int getContactsId() {
         return contactsId;
     }
 
-    public void setContactsId(id contactsId) {
+    public void setContactsId(int contactsId) {
         this.contactsId = contactsId;
     }
 
     @Basic
     @Column(name = "events_id", nullable = false)
-    public id getEventsId() {
+    public int getEventsId() {
         return eventsId;
     }
 
-    public void setEventsId(id eventsId) {
+    public void setEventsId(int eventsId) {
         this.eventsId = eventsId;
     }
 
     @Basic
     @Column(name = "users_id", nullable = false)
-    public id getUsersId() {
+    public int getUsersId() {
         return usersId;
     }
 
-    public void setUsersId(id usersId) {
+    public void setUsersId(int usersId) {
         this.usersId = usersId;
     }
 

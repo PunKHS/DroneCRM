@@ -1,6 +1,5 @@
 package com.crm.model;
 
-import org.hibernate.annotations.Table;
 import java.io.Serializable;
 import javax.persistence.*;
 

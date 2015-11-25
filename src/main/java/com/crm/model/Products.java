@@ -1,6 +1,5 @@
 package com.crm.model;
 
-import org.hibernate.annotations.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;  // А надо ли?
 import javax.persistence.*;
@@ -16,7 +15,7 @@ public class Products implements Serializable {
     @Id
     @GeneratedValue(generator = "products_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "products_seq", sequenceName = "products_id_seq", allocationSize = 1)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     public int getId() {
         return id;
     }
@@ -26,7 +25,7 @@ public class Products implements Serializable {
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", unique = true, nullable = false, length = 50)
     public String getName() {
         return name;
     }

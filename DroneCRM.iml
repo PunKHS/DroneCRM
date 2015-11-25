@@ -5,6 +5,13 @@
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/datasource.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/root-context.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/root-context.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/datasource-tx-jpa.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/datasource-tx-jpa.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/app-context.xml</file>
+          <file>file://$MODULE_DIR$/web/WEB-INF/spring/appServer/servlet-context.xml</file>
+          <file>file://$MODULE_DIR$/web/WEB-INF/spring/root-context.xml</file>
         </fileset>
       </configuration>
     </facet>

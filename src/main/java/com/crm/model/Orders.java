@@ -1,6 +1,5 @@
 package com.crm.model;
 
-import org.hibernate.annotations.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -28,7 +27,7 @@ public class Orders implements Serializable {
     }
 
     @Basic
-    @Column(name = "date", nullable = true)
+    @Column(name = "date", unique = true, nullable = true)
     public Timestamp getDate() {
         return date;
     }
@@ -38,7 +37,7 @@ public class Orders implements Serializable {
     }
 
     @Basic
-    @Column(name = "number", nullable = true, length = 20)
+    @Column(name = "number", unique = true, nullable = true, length = 20)
     public String getNumber() {
         return number;
     }

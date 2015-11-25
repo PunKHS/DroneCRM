@@ -1,6 +1,5 @@
 package com.crm.model;
 
-import org.hibernate.annotations.Table;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -14,7 +13,7 @@ public class Banks implements Serializable {
     @GeneratedValue(generator = "banks_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "banks_seq", sequenceName = "banks_id_seq", allocationSize = 1)
 //    @GeneratedValue(strategy = GenerationType.IDENTITY) // Старый вариант
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     public int getId() {
         return id;
     }
@@ -24,7 +23,7 @@ public class Banks implements Serializable {
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", unique = true, nullable = false, length = 50)
     public String getName() {
         return name;
     }

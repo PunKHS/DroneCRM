@@ -1,6 +1,5 @@
 package com.crm.model;
 
-import org.hibernate.annotations.Table;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -14,7 +13,7 @@ public class Measures implements Serializable {
     @Id
     @GeneratedValue(generator = "measures_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "measures_seq", sequenceName = "measures_id_seq", allocationSize = 1)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     public int getId() {
         return id;
     }
@@ -24,7 +23,7 @@ public class Measures implements Serializable {
     }
 
     @Basic
-    @Column(name = "sname", nullable = false, length = 5)
+    @Column(name = "sname", unique = true, nullable = false, length = 5)
     public String getSname() {
         return sname;
     }
@@ -34,7 +33,7 @@ public class Measures implements Serializable {
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 20)
+    @Column(name = "name", unique = true, nullable = false, length = 20)
     public String getName() {
         return name;
     }

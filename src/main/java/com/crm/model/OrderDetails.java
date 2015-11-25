@@ -1,6 +1,5 @@
 package com.crm.model;
 
-import org.hibernate.annotations.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.*;
@@ -15,7 +14,7 @@ public class OrderDetails implements Serializable {
     private BigDecimal total; // ?
 
     @Basic
-    @Column(name = "orders_id", nullable = false)
+    @Column(name = "orders_id", unique = true, nullable = false)
     public int getOrdersId() {
         return ordersId;
     }

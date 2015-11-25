@@ -1,11 +1,11 @@
 package com.crm.model;
 
-import org.hibernate.annotations.Table;
 import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "events", schema = "public", catalog = "crm")
+@Table(name = "contracts", schema = "public", catalog = "crm")
+//@Table(name = "events", schema = "public", catalog = "crm")
 public class Events implements Serializable {
     private Integer id;
     private String name;
@@ -13,7 +13,7 @@ public class Events implements Serializable {
     @Id
     @GeneratedValue(generator = "events_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "events_seq", sequenceName = "events_id_seq", allocationSize = 1)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     public int getId() {
         return id;
     }
@@ -23,7 +23,7 @@ public class Events implements Serializable {
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 20)
+    @Column(name = "name", unique = true, nullable = false, length = 20)
     public String getName() {
         return name;
     }
