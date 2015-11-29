@@ -7,11 +7,25 @@ import javax.persistence.*;
 @Entity
 @Table(name = "order_details", schema = "public", catalog = "crm")
 public class OrderDetails implements Serializable {
+    private Integer id;
     private Integer ordersId;
     private Integer productsId;
     private Integer qty;
     private BigDecimal price; // ?
     private BigDecimal total; // ?
+
+    @Id
+    @GeneratedValue(generator = "order_details_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "order_details_seq", sequenceName = "order_details_id_seq", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY) // Старый вариант
+    @Column(name = "id", unique = true, nullable = false)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Basic
     @Column(name = "orders_id", unique = true, nullable = false)

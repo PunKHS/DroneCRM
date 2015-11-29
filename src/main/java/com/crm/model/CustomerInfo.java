@@ -33,8 +33,8 @@ public class CustomerInfo implements Serializable {
         this.banksId = banksId;
     }
 
-    @Basic
-    @Column(name = "account", nullable = false, length = 20)
+    @Id
+    @Column(name = "account", unique = true, nullable = false, length = 20)
     public String getAccount() {
         return account;
     }

@@ -3,6 +3,9 @@ package com.crm.service;
 import com.crm.model.Banks;
 import com.crm.repository.BanksRepository;
 import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,21 +15,32 @@ import java.util.List;
 @Repository
 @Transactional
 @Service("banksService")
-public class BanksserviceImpl implements BanksService {
-    private BanksRepository bankRepository;
+public class BanksServiceImpl implements BanksService {
+    private BanksRepository banksRepository;
 
-//    @Override
+    //    @Override
     @Transactional(readOnly = true)
     public List<Banks> findAll() {
-        return Lists.newArrayList(bankRepository.findAll());
+        return Lists.newArrayList(banksRepository.findAll());
     }
 
     @Transactional(readOnly = true)
-    public Banks findByid(Long id) {
-        return bankRepository.findOne(id);
+    public Banks findById(int id) {
+        return banksRepository.findOne((long)id);
     }
 
-    public Banks save(Banks contact) {
-        return bankRepository.save(contact) ;
+    public Banks save(Banks banks) {
+        return banksRepository.save(banks);
+    }
+
+    @Autowired
+    public void setContactRepository(BanksRepository banksRepository) {
+        this.banksRepository = banksRepository;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Banks> findAllByPage(Pageable pageable) {
+//        return banksRepository.findAll(pageable);
+        return null;
     }
 }
