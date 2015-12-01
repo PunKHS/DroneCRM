@@ -5,7 +5,7 @@ import java.sql.Date;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "сontacts", schema = "public", catalog = "crm")
+@Table(name = "contacts", schema = "public", catalog = "crm")
 public class Contacts implements Serializable {
     private Integer id;
     private Integer customersId;

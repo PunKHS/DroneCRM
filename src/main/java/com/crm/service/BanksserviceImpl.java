@@ -34,7 +34,7 @@ public class BanksServiceImpl implements BanksService {
     }
 
     @Autowired
-    public void setContactRepository(BanksRepository banksRepository) {
+    public void setBanksRepository(BanksRepository banksRepository) {
         this.banksRepository = banksRepository;
     }
 

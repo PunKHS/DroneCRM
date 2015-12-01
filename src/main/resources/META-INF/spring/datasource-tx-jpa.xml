@@ -16,6 +16,11 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <!-- Directory to scan for repository classes -->
+    <jpa:repositories base-package="com.crm"
+                      entity-manager-factory-ref="emf"
+                      transaction-manager-ref="transactionManager"/>
+
     <!-- Connect PostgeSQL -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
@@ -24,12 +29,7 @@
         <property name="password" value="masterkey"/>
     </bean>
 
-    <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
-
-    <!-- Менеджер транзакций -->
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="emf"/>
-    </bean>
+    <!--<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>-->
 
     <!-- Настройки управления транзакциями с помощью аннотации @Transactional -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -37,26 +37,27 @@
     <!-- Настройки фабрики сессий Hibernate -->
     <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceUnitName" value="jpaData" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
         <property name="packagesToScan" value="com.crm"/>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.dialect">
-                    org.hibernate.dialect.PostgreSQLDialect
-                </prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>
+                <!--<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>-->
                 <!-- Создание структуры и заполнение тестовыми данными-->
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.format_sql">false</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
             </props>
         </property>
     </bean>
 
-    <context:annotation-config/>
+    <!-- Менеджер транзакций -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
+    </bean>
 
-    <jpa:repositories base-package="com.crm"
-                      entity-manager-factory-ref="emf"
-                      transaction-manager-ref="transactionManager"/>
+    <context:annotation-config/>
 </beans>
