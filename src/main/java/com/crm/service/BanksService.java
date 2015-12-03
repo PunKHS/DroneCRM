@@ -9,7 +9,7 @@ import java.util.List;
 public interface BanksService {
     List<Banks> findAll();
 
-    Banks findById(int id);
+    Banks findById(long id);
 
     Banks save(Banks banks);
 

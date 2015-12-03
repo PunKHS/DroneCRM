@@ -22,11 +22,20 @@
                       transaction-manager-ref="transactionManager"/>
 
     <!-- Connect PostgeSQL -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/crm"/>
-        <property name="username" value="postgres"/>
-        <property name="password" value="masterkey"/>
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName">
+            <value>org.postgresql.Driver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:postgresql://localhost:5432/crm</value>
+        </property>
+        <property name="username">
+            <value>postgres</value>
+        </property>
+        <property name="password">
+            <value>masterkey</value>
+        </property>
     </bean>
 
     <!--<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>-->
@@ -37,19 +46,19 @@
     <!-- Настройки фабрики сессий Hibernate -->
     <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="persistenceUnitName" value="jpaData" />
+        <property name="persistenceUnitName" value="jpaData"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
-        <property name="packagesToScan" value="com.crm"/>
+        <property name="packagesToScan" value="com.crm.model"/>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
                 <!--<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>-->
                 <!-- Создание структуры и заполнение тестовыми данными-->
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.format_sql">false</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
         </property>
     </bean>

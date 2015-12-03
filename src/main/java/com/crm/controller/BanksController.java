@@ -50,7 +50,7 @@ public class BanksController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String show(@PathVariable("id") Integer id, Model uiModel) {
+    public String show(@PathVariable("id") Long id, Model uiModel) {
         Banks banks = banksService.findById(id);
         uiModel.addAttribute("banks", banks);
 
@@ -72,7 +72,7 @@ public class BanksController {
         redirectAttributes.addFlashAttribute("message", new Message("success",
                 messageSource.getMessage("banks_save_success", new Object[]{}, locale)));
         banksService.save(banks);
-        return "redirect:/banks/" + UrlUtil.encodeUrlPathSegment(Integer.toString(banks.getId()),
+        return "redirect:/banks/" + UrlUtil.encodeUrlPathSegment(banks.getId().toString(),
                 httpServletRequest);
     }
 

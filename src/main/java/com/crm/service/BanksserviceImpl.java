@@ -25,8 +25,8 @@ public class BanksServiceImpl implements BanksService {
     }
 
     @Transactional(readOnly = true)
-    public Banks findById(int id) {
-        return banksRepository.findOne((long)id);
+    public Banks findById(long id) {
+        return banksRepository.findOne(id);
     }
 
     public Banks save(Banks banks) {

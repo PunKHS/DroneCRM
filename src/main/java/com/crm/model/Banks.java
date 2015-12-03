@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "banks", schema = "public", catalog = "crm")
 public class Banks implements Serializable {
-    private Integer id;
+    private Long id;
     private String name;
 
     @Id
@@ -14,11 +14,11 @@ public class Banks implements Serializable {
     @SequenceGenerator(name = "banks_seq", sequenceName = "banks_id_seq", allocationSize = 1)
 //    @GeneratedValue(strategy = GenerationType.IDENTITY) // Старый вариант
     @Column(name = "id", unique = true, nullable = false)
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
