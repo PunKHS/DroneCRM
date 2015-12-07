@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RequestMapping("/banks")
@@ -27,6 +28,14 @@ public class BanksController {
         logger.info("No. of banks: " + banks.size());
 
         return "banks/list";
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+        Banks banks = banksService.findById(id);
+        uiModel.addAttribute("banks", banks);
+
+        return "banks/show";
     }
 
     @Autowired
