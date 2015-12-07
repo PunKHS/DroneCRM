@@ -9,9 +9,7 @@ import java.util.List;
 public interface BanksService {
     List<Banks> findAll();
 
-    Banks findById(long id);
+    Banks findById(Long id);
 
     Banks save(Banks banks);
-
-    Page<Banks> findAllByPage(Pageable pageable);
 }

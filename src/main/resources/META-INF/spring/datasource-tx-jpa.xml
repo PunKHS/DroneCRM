@@ -17,11 +17,19 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- Directory to scan for repository classes -->
-    <jpa:repositories base-package="com.crm"
+    <jpa:repositories base-package="com.crm.repository"
                       entity-manager-factory-ref="emf"
                       transaction-manager-ref="transactionManager"/>
 
-    <!-- Connect PostgeSQL -->
+    <!-- Настройки управления транзакциями с помощью аннотации @Transactional -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- Менеджер транзакций -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
+    </bean>
+
+    <!-- Настройка соединения с PostgeSQL -->
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName">
@@ -38,10 +46,11 @@
         </property>
     </bean>
 
+
+
     <!--<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>-->
 
-    <!-- Настройки управления транзакциями с помощью аннотации @Transactional -->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+
 
     <!-- Настройки фабрики сессий Hibernate -->
     <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -54,18 +63,12 @@
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
-                <!--<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>-->
                 <!-- Создание структуры и заполнение тестовыми данными-->
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.format_sql">false</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
             </props>
         </property>
-    </bean>
-
-    <!-- Менеджер транзакций -->
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="emf"/>
     </bean>
 
     <context:annotation-config/>

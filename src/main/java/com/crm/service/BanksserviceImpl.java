@@ -4,6 +4,7 @@ import com.crm.model.Banks;
 import com.crm.repository.BanksRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -18,14 +19,13 @@ import java.util.List;
 public class BanksServiceImpl implements BanksService {
     private BanksRepository banksRepository;
 
-    //    @Override
     @Transactional(readOnly = true)
     public List<Banks> findAll() {
         return Lists.newArrayList(banksRepository.findAll());
     }
 
     @Transactional(readOnly = true)
-    public Banks findById(long id) {
+    public Banks findById(Long id) {
         return banksRepository.findOne(id);
     }
 
@@ -36,11 +36,5 @@ public class BanksServiceImpl implements BanksService {
     @Autowired
     public void setBanksRepository(BanksRepository banksRepository) {
         this.banksRepository = banksRepository;
-    }
-
-    @Transactional(readOnly = true)
-    public Page<Banks> findAllByPage(Pageable pageable) {
-//        return banksRepository.findAll(pageable);
-        return null;
     }
 }
