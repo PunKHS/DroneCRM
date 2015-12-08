@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+
+    <!--<script type="text/javascript">-->
+    <!--$(function(){-->
+    <!--$('#birthDate').datepicker({-->
+    <!--dateFormat: 'yy-mm-dd',-->
+    <!--changeYear: true-->
+    <!--});-->
+
+    <!--$("#banksDescription").ckeditor(-->
+    <!--{-->
+    <!--toolbar : 'Basic',-->
+    <!--uiColor : '#CCCCCC'-->
+    <!--}-->
+    <!--);-->
+    <!--});-->
+    <!--</script>-->
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_banks_new" var="labelBanksNew"/>
+    <spring:message code="label_banks_name" var="labelBanksName"/>
+    <spring:message code="label_banks_update" var="labelBanksUpdate"/>
+
+    <!-- Проверка редактирование/обновление -->
+    <!--<spring:eval expression="banks.id == null ? labelBanksNew:labelBanksUpdate"-->
+    <spring:eval expression="labelBanksUpdate"
+                 var="formTitle"/>
+
+    <h1>${formTitle}</h1>
+
+    <div id="banksUpdate">
+        <form:form modelAttribute="banks" id="banksUpdateForm" method="post"
+                   enctype="multipart/form-data">
+
+            <c:if test="${not empty message}">
+                <div id="message" class="${message.type}">${message.message}</div>
+            </c:if>
+
+
+            <form:label path="name">
+                ${labelBanksName}*
+            </form:label>
+            <form:input path="name" value="${banks.name}" />
+            <div>
+                <form:errors path="name" cssClass="error" />
+            </div>
+            <p/>
+
+            <!--<form:hidden path="id"/>-->
+
+            <!--<button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">-->
+                <!--<span class="ui-button-text">Save</span>-->
+            <!--</button>-->
+            <!--<button type="reset" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">-->
+                <!--<span class="ui-button-text">Reset</span>-->
+            <!--</button>-->
+
+            <button type="submit">Save</button>
+            <button type="reset">Reset</button>
+
+        </form:form>
+    </div>
+</div>
