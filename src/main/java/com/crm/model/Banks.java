@@ -2,11 +2,15 @@ package com.crm.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "banks", schema = "public", catalog = "crm")
 public class Banks implements Serializable {
     private Long id;
+
+    @Size(min=3, max=5,
+            message="Your full name must be between 3 and 50 characters long.")
     private String name;
 
     @Id

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
@@ -57,8 +58,8 @@ public class BanksController {
             uiModel.addAttribute("banks", banks);
             return "banks/update";
         }
+        logger.info(banks.getName());
         uiModel.asMap().clear();
-        logger.info("!");
         redirectAttributes.addFlashAttribute("message", new Message("success",
                 messageSource.getMessage("banks_save_success", new Object[]{}, locale)));
         banksService.save(banks);
@@ -70,6 +71,31 @@ public class BanksController {
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("banks", banksService.findById(id));
         return "banks/update";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String create(@Valid Banks banks, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes, Locale locale) {
+        logger.info("Creating banks");
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("message", new Message("error",
+                    messageSource.getMessage("banks_save_fail", new Object[]{}, locale)));
+            uiModel.addAttribute("banks", banks);
+            return "banks/create";
+        }
+        uiModel.asMap().clear();
+        redirectAttributes.addFlashAttribute("message", new Message("success",
+                messageSource.getMessage("banks_save_success", new Object[]{}, locale)));
+        logger.info("Banks id: " + banks.getId());
+        banksService.save(banks);
+        return "redirect:/banks/";
+    }
+
+    @RequestMapping(params = "form", method = RequestMethod.GET)
+    public String createForm(Model uiModel) {
+        Banks banks = new Banks();
+        uiModel.addAttribute("banks", banks);
+
+        return "banks/create";
     }
 
     @Autowired
