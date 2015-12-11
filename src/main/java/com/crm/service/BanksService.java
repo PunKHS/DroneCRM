@@ -12,4 +12,6 @@ public interface BanksService {
     Banks findById(Long id);
 
     Banks save(Banks banks);
+
+    Page<Banks> findAllByPage(Pageable pageable);
 }

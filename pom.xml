@@ -24,10 +24,11 @@
         <javaee.web.api.version>6.0</javaee.web.api.version>
         <hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
         <hibernate.entitymanager.version>4.3.2.Final</hibernate.entitymanager.version>
-        <jackson.version>1.9.13</jackson.version>
+        <!--<jackson.version>1.9.13</jackson.version>-->
         <commons.io.version>2.4</commons.io.version>
         <spring.security.version>3.2.1.RELEASE</spring.security.version>
         <postgresql.version>9.4-1206-jdbc41</postgresql.version>
+        <jackson.version>2.6.3</jackson.version>
     </properties>
     <dependencies>
         <dependency>
@@ -112,11 +113,11 @@
             <version>${javaee.web.api.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-lgpl</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.codehaus.jackson</groupId>-->
+            <!--<artifactId>jackson-mapper-lgpl</artifactId>-->
+            <!--<version>${jackson.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -164,6 +165,21 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
     </dependencies>
 </project>

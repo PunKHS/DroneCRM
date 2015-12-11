@@ -1,5 +1,7 @@
 package com.crm.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -8,9 +10,6 @@ import javax.validation.constraints.Size;
 @Table(name = "banks", schema = "public", catalog = "crm")
 public class Banks implements Serializable {
     private Long id;
-
-    @Size(min=3, max=5,
-            message="Your full name must be between 3 and 50 characters long.")
     private String name;
 
     @Id
@@ -26,7 +25,9 @@ public class Banks implements Serializable {
         this.id = id;
     }
 
-    @Basic
+
+    @NotEmpty(message = "{validation.name.NotEmpty.message}")
+    @Size(min = 1, max = 20, message = "{validation.name.Size.message}")
     @Column(name = "name", unique = true, nullable = false, length = 50)
     public String getName() {
         return name;

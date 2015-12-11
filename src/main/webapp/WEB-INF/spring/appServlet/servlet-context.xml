@@ -11,18 +11,14 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- Поддержка JSR-349 (валидатора) -->
+    <annotation-driven validator="validator"/>
+
     <!-- Разрешаем использование аннотаций Spring MVC (то есть @Controller и.т.д) -->
     <annotation-driven/>
 
     <!-- Обработка запроса на получение статических ресурсов -->
     <resources location="/, classpath:/META-INF/web-resources/" mapping="/resources/**"/>
-    <!--<resources mapping="/resources/**" location="/" />-->
-
-    <!-- Определение представления -->
-    <!--<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-        <!--<beans:property name="prefix" value="/WEB-INF/views/"/>-->
-        <!--<beans:property name="suffix" value=".jspx"/>-->
-    <!--</beans:bean>-->
 
     <!--Конфигурация Apache Tiles-->
     <beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
@@ -48,6 +44,8 @@
     <!-- Запись параметров сессии в печеньку (для интернационализация) -->
     <beans:bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
                 id="localeResolver" p:cookieName="locale"/>
+    <!--<beans:bean class="org.springframework.web.servlet.i18n.SessionLocaleResolver"-->
+                <!--id="localeResolver" p:defaultLocale="ru"/>-->
     <!-- /Интернационализация -->
 
     <!-- Перехватчика темы -->
@@ -62,6 +60,11 @@
                 id="themeSource"/>
     <beans:bean class="org.springframework.web.servlet.theme.CookieThemeResolver"
                 id="themeResolver" p:cookieName="theme" p:defaultThemeName="standard"/>
+
+    <!-- Поддержка JSR-349 (валидатора) -->
+    <beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <beans:property name="validationMessageSource" ref="messageSource"/>
+    </beans:bean>
 
     <!-- Пространство имен для сканирования -->
     <context:component-scan base-package="com.crm"/>

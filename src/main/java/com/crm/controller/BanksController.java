@@ -1,12 +1,17 @@
 package com.crm.controller;
 
+import com.crm.grid.BanksGrid;
 import com.crm.model.Banks;
 import com.crm.service.BanksService;
 import com.crm.service.UrlUtil;
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -97,6 +102,56 @@ public class BanksController {
 
         return "banks/create";
     }
+
+// Построничное разбиение информации в гриде
+    @ResponseBody
+    @RequestMapping(value = "/listgrid", method = RequestMethod.GET, produces="application/json")
+    public BanksGrid listGrid(@RequestParam(value = "page", required = false) Integer page,
+                              @RequestParam(value = "rows", required = false) Integer rows,
+                              @RequestParam(value = "sidx", required = false) String sortBy,
+                              @RequestParam(value = "sord", required = false) String order) {
+
+        logger.info("Listing banks for grid with page: {}, rows: {}", page, rows);
+        logger.info("Listing banks for grid with sort: {}, order: {}", sortBy, order);
+
+        // Process order by
+        Sort sort = null;
+        String orderBy = sortBy;
+//        if (orderBy != null && orderBy.equals("birthDateString"))
+//            orderBy = "birthDate";
+
+        if (orderBy != null && order != null) {
+            if (order.equals("desc")) {
+                sort = new Sort(Sort.Direction.DESC, orderBy);
+            } else
+                sort = new Sort(Sort.Direction.ASC, orderBy);
+        }
+
+        // Constructs page request for current page
+        // Note: page number for Spring Data JPA starts with 0, while jqGrid starts with 1
+        PageRequest pageRequest = null;
+
+        if (sort != null) {
+            pageRequest = new PageRequest(page - 1, rows, sort);
+        } else {
+            pageRequest = new PageRequest(page - 1, rows);
+        }
+
+        Page<Banks> banksPage = banksService.findAllByPage(pageRequest);
+
+        // Construct the grid data that will return as JSON data
+        BanksGrid banksGrid = new BanksGrid();
+
+        banksGrid.setCurrentPage(banksPage.getNumber() + 1);
+        banksGrid.setTotalPages(banksPage.getTotalPages());
+        banksGrid.setTotalRecords(banksPage.getTotalElements());
+
+        banksGrid.setBanksData(Lists.newArrayList(banksPage.iterator()));
+
+        return banksGrid;
+    }
+
+
 
     @Autowired
     public void setBanksService(BanksService banksService) {

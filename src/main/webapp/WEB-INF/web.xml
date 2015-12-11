@@ -39,6 +39,7 @@
         <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
     </filter>
 
+    <!-- Перекодировка символов, поступающих от пользователя -->
     <filter-mapping>
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>

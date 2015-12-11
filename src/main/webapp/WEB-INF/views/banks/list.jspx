@@ -3,40 +3,74 @@
      xmlns:c="http://java.sun.com/jsp/jstl/core"
      xmlns:spring="http://www.springframework.org/tags"
      version="2.0">
+
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
     <spring:message code="label_banks_list" var="labelBanksList"/>
-
+    <spring:message code="label_banks_id" var="labelBanksID"/>
+    <spring:message code="label_banks_name" var="labelBanksName"/>
     <spring:url value="/banks/" var="showBanksUrl"/>
 
-    <!--<head>-->
-        <!--<spring:theme code="styleSheet" var="app_css"/>-->
-        <!--<spring:url value="/${ app_css }" var="app_css_url"/>-->
-        <!--<link rel="stylesheet" type="text/css" media="screen"-->
-              <!--href="${ app_css_url }"/>-->
-    <!--</head>-->
+    <!--<h1>${labelBanksList}</h1>-->
 
-    <h1>${labelBanksList}</h1>
+    <script type="text/javascript">
+        $(function(){
+            $("#list").jqGrid({
+                url:'${showBanksUrl}/listgrid',
+                datatype: 'json',
+                mtype: 'GET',
+                colNames:['${labelBanksName}'],
+                colModel :[
+                    {name:'name', index:'name', width:500},
+                ],
+                jsonReader : {
+                    root:"banksData",
+                    page: "currentPage",
+                    total: "totalPages",
+                    records: "totalRecords",
+                    repeatitems: false,
+                    id: "id"
+                },
+                pager: '#pager',
+                rowNum:10,
+                rowList:[10,20,30],
+                sortname: 'name',
+                sortorder: 'desc',
+                viewrecords: true,
+                gridview: true,
+                height: 250,
+                width: 500,
+                caption: '${labelBanksList}',
+                onSelectRow: function(id){
+                    document.location.href ="${showBanksUrl}/" + id;
+                }
+            });
+        });
+    </script>
 
-    <c:if test="${not empty banks}">
-        <table>
-            <thead>
-            <tr>
-                <th>Код</th>
-                <th>Название</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${banks}" var="banks">
-                <tr>
-                    <td><a href="${ showBanksUrl }/${ banks.id }">
-                    ${ banks.id }</a></td>
-                    <!--<td>${banks.id}</td>-->
-                    <td>${banks.name}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </c:if>
+    <!--<c:if test="${not empty banks}">-->
+        <!--<table id="list">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Код</th>-->
+                <!--<th>Название</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<c:forEach items="${banks}" var="banks">-->
+                <!--<tr>-->
+                    <!--<td><a href="${ showBanksUrl }/${ banks.id }">-->
+                        <!--${ banks.id }</a></td>-->
+                    <!--&lt;!&ndash;<td>${banks.id}</td>&ndash;&gt;-->
+                    <!--<td>${banks.name}</td>-->
+                <!--</tr>-->
+            <!--</c:forEach>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</c:if>-->
+    <div>
+        <table id="list"><tr><td/></tr></table>
+    </div>
+    <div id="pager"></div>
 </div>

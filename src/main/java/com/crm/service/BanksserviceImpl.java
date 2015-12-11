@@ -33,6 +33,10 @@ public class BanksServiceImpl implements BanksService {
         return banksRepository.save(banks);
     }
 
+    public Page<Banks> findAllByPage(Pageable pageable) {
+        return banksRepository.findAll(pageable);
+    }
+
     @Autowired
     public void setBanksRepository(BanksRepository banksRepository) {
         this.banksRepository = banksRepository;
