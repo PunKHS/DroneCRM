@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:spring="http://www.springframework.org/tags"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_customers_list" var="labelCustomersList"/>
+    <spring:message code="label_customers_id" var="labelCustomersID"/>
+    <spring:message code="label_customers_name" var="labelCustomersName"/>
+    <spring:url value="/customers/" var="showCustomersUrl"/>
+
+    <!--<h1>${labelCustomersList}</h1>-->
+
+    <script type="text/javascript">
+        $(function(){
+            $("#list").jqGrid({
+                url:'${showCustomersUrl}/listgrid',
+                datatype: 'json',
+                mtype: 'GET',
+                colNames:['${labelCustomersName}'],
+                colModel :[
+                    {name:'name', index:'name', width:500}
+                ],
+                jsonReader : {
+                    root:"customersData",
+                    page: "currentPage",
+                    total: "totalPages",
+                    records: "totalRecords",
+                    repeatitems: false,
+                    id: "id"
+                },
+                pager: '#pager',
+                rowNum:10,
+                rowList:[10,20,30],
+                sortname: 'name',
+                sortorder: 'desc',
+                viewrecords: true,
+                gridview: true,
+                height: 250,
+                width: 500,
+                caption: '${labelCustomersList}',
+                onSelectRow: function(id){
+                    document.location.href ="${showCustomersUrl}/" + id;
+                }
+            });
+        });
+    </script>
+
+    <!--<c:if test="${not empty customers}">-->
+        <!--<table id="list">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Код</th>-->
+                <!--<th>Название</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<c:forEach items="${customers}" var="customers">-->
+                <!--<tr>-->
+                    <!--<td><a href="${ showCustomersUrl }/${ customers.id }">-->
+                        <!--${ customers.id }</a></td>-->
+                    <!--&lt;!&ndash;<td>${customers.id}</td>&ndash;&gt;-->
+                    <!--<td>${customers.name}</td>-->
+                <!--</tr>-->
+            <!--</c:forEach>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</c:if>-->
+    <div>
+        <table id="list"><tr><td/></tr></table>
+    </div>
+    <div id="pager"></div>
+</div>

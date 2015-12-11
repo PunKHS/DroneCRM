@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_customers_info" var="labelCustomersInfo"/>
+    <spring:message code="label_customers_id" var="labelCustomersID"/>
+    <spring:message code="label_customers_name" var="labelCustomersName"/>
+    <spring:message code="label_customers_update" var="labelCustomersUpdate"/>
+
+    <spring:url value="/customers" var="editCustomersUrl"/>
+
+    <h1>${labelCustomersInfo}</h1>
+
+    <div id="customersInfo">
+
+        <c:if test="${not empty message}">
+            <div id="message" class="${message.type}">${message.message}</div>
+        </c:if>
+
+        <table>
+            <tr>
+                <td>${labelCustomersID}</td>
+                <td>${customers.id}</td>
+            </tr>
+            <tr>
+                <td>${labelCustomersName}</td>
+                <td>${customers.name}</td>
+            </tr>
+        </table>
+
+        <a href="${editCustomersUrl}/${customers.id}?form">${labelCustomersUpdate}</a>
+    </div>
+</div>
