@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/src/main/java/com/crm/controller/BanksController.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/crm/controller/CustomersController.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/crm/controller/Message.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/crm/controller/SecurityController.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/crm/grid/BanksGrid.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/crm/grid/CustomersGrid.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/crm/service/UrlUtil.java" charset="windows-1251" />

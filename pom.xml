@@ -9,8 +9,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--<spring.version>4.0.2.RELEASE</spring.version>-->
-        <spring.version>4.2.3.RELEASE</spring.version>
+        <spring.version>4.0.2.RELEASE</spring.version>
+        <!--<spring.version>4.2.3.RELEASE</spring.version>-->
         <jpa.version>1.0.0.Final</jpa.version>
         <joda.time.version>2.2</joda.time.version>
         <usertype.version>3.0.0.GA</usertype.version>
@@ -27,6 +27,7 @@
         <!--<jackson.version>1.9.13</jackson.version>-->
         <commons.io.version>2.4</commons.io.version>
         <spring.security.version>3.2.1.RELEASE</spring.security.version>
+        <!--<spring.security.version>3.2.9.RELEASE</spring.security.version>-->
         <postgresql.version>9.4-1206-jdbc41</postgresql.version>
         <jackson.version>2.6.3</jackson.version>
     </properties>

@@ -4,18 +4,22 @@
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:p="http://www.springframework.org/schema/p"
              xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:security="http://www.springframework.org/schema/security"
              xsi:schemaLocation="http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <!-- Поддержка JSR-349 (валидатора) -->
-    <annotation-driven validator="validator"/>
+    <!-- Включение модели программрования @Controller в SpringMVC
+    (Разрешаем использование аннотаций Spring MVC (то есть @Controller и.т.д) + JSR-349) -->
+    <annotation-driven validator="validator"/><annotation-driven/>
 
-    <!-- Разрешаем использование аннотаций Spring MVC (то есть @Controller и.т.д) -->
-    <annotation-driven/>
+    <!-- Включение защиты на уровне методов контроллера (@PreAuthorize) -->
+    <security:global-method-security pre-post-annotations="enabled"/>
 
     <!-- Обработка запроса на получение статических ресурсов -->
     <resources location="/, classpath:/META-INF/web-resources/" mapping="/resources/**"/>
@@ -25,6 +29,7 @@
                 id="tilesViewResolver">
         <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
     </beans:bean>
+
     <!--Конфигурация Apache Tiles-->
     <beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer" id="tilesConfigurer">
         <beans:property name="definitions">

@@ -9,9 +9,9 @@
 
     <http use-expressions="true">
         <intercept-url pattern='/WEB-INF' access='permitAll' />
-        <form-login login-page="/banks" authentication-failure-url="/com/crm/security/loginfail"
-                    default-target-url="/banks" />
-        <logout logout-success-url="/banks"/>
+        <form-login login-page="/customers" authentication-failure-url="/com/crm/security/loginfail"
+                    default-target-url="/customers" />
+        <logout logout-success-url="/customers"/>
     </http>
 
     <authentication-manager>

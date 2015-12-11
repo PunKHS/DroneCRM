@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     xmlns:joda="http://www.joda.org/joda/time/tags"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_banks_info" var="labelBanksInfo"/>
+    <spring:message code="label_banks_id" var="labelBanksID"/>
+    <spring:message code="label_banks_name" var="labelBanksName"/>
+    <spring:message code="label_banks_update" var="labelBanksUpdate"/>
+
+    <spring:url value="/banks" var="editBanksUrl"/>
+
+    <h1>${labelBanksInfo}</h1>
+
+    <div id="banksInfo">
+
+        <c:if test="${not empty message}">
+            <div id="message" class="${message.type}">${message.message}</div>
+        </c:if>
+
+        <table>
+            <tr>
+                <td>${labelBanksID}</td>
+                <td>${banks.id}</td>
+            </tr>
+            <tr>
+                <td>${labelBanksName}</td>
+                <td>${banks.name}</td>
+            </tr>
+        </table>
+
+        <a href="${editBanksUrl}/${banks.id}?form">${labelBanksUpdate}</a>
+    </div>
+</div>
