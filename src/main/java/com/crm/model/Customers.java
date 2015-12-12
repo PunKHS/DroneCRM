@@ -17,6 +17,8 @@ public class Customers implements Serializable {
     private Long id;
     private String name;
     public Set<Contacts> contacts = new HashSet<Contacts>();
+    public Set<CustomerInfo> customerInfo = new HashSet<CustomerInfo>();
+    public Set<Orders> orders = new HashSet<Orders>();
 
     @Id
     @GeneratedValue(generator = "customers_seq", strategy = GenerationType.SEQUENCE)
@@ -53,14 +55,36 @@ public class Customers implements Serializable {
         this.contacts = contacts;
     }
 
-    // Добавление нового контактного лица
-    public void addContacts(Contacts contacts) {
-        contacts.setCustomers(this);
-        getContacts().add(contacts);
+    // Связь с таблицей CustomerInfo
+    @OneToMany(mappedBy = "customers", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("customerInfo")
+    public Set<CustomerInfo> getCustomerInfo() {
+        return customerInfo;
     }
 
-    // Удаление контакта
-    public void removeContacts(Contacts contacts) {
-        getContacts().remove(contacts);
+    public void setCustomerInfo(Set<CustomerInfo> customerInfo) {
+        this.customerInfo = customerInfo;
     }
+
+    // Связь с таблицей Orders
+    @OneToMany(mappedBy = "customers", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("orders")
+    public Set<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Orders> orders) {
+        this.orders = orders;
+    }
+
+//    // Добавление нового контактного лица
+//    public void addContacts(Contacts contacts) {
+//        contacts.setCustomers(this);
+//        getContacts().add(contacts);
+//    }
+//
+//    // Удаление контакта
+//    public void removeContacts(Contacts contacts) {
+//        getContacts().remove(contacts);
+//    }
 }

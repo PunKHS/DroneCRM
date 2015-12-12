@@ -1,8 +1,10 @@
 package com.crm.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -12,16 +14,7 @@ import javax.validation.constraints.Size;
 public class Banks implements Serializable {
     private Long id;
     private String name;
-
-    //  Связь с таблицей CustomerInfo
-//    @OneToMany(mappedBy = "banks", cascade=CascadeType.ALL, orphanRemoval=true)
-//    private Set<CustomerInfo> customerInfo;
-//    public Set<CustomerInfo> getCustomerInfo() {
-//        return customerInfo;
-//    }
-//    public void setCustomerInfo(Set<CustomerInfo> customerInfo) {
-//        this.customerInfo = customerInfo;
-//    }
+    public Set<CustomerInfo> customerInfo = new HashSet<CustomerInfo>();
 
     @Id
     @GeneratedValue(generator = "banks_seq", strategy = GenerationType.SEQUENCE)
@@ -46,5 +39,16 @@ public class Banks implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    // Связь с таблицей CustomerInfo
+    @OneToMany(mappedBy = "banks", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("customerInfo")
+    public Set<CustomerInfo> getCustomerInfo() {
+        return customerInfo;
+    }
+
+    public void setCustomerInfo(Set<CustomerInfo> customerInfo) {
+        this.customerInfo = customerInfo;
     }
 }

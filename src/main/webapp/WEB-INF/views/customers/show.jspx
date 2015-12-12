@@ -11,8 +11,10 @@
     <spring:message code="label_customers_id" var="labelCustomersID"/>
     <spring:message code="label_customers_name" var="labelCustomersName"/>
     <spring:message code="label_customers_update" var="labelCustomersUpdate"/>
+    <spring:message code="label_customers_delete" var="labelCustomersDelete"/>
 
     <spring:url value="/customers" var="editCustomersUrl"/>
+    <spring:url value="/customers/delete" var="deleteCustomersUrl"/>
 
     <h1>${labelCustomersInfo}</h1>
 
@@ -34,5 +36,6 @@
         </table>
 
         <a href="${editCustomersUrl}/${customers.id}?form">${labelCustomersUpdate}</a>
+        <a href="${deleteCustomersUrl}/${customers.id}?form">${labelCustomersDelete}</a>
     </div>
 </div>

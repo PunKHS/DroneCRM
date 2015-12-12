@@ -52,6 +52,22 @@ public class CustomersController {
         return "customers/show";
     }
 
+
+
+
+    @RequestMapping(value = "/delete/{id}", params = "form", method = RequestMethod.GET)
+//    @RequestMapping(value = { "/delete/{id}" }, params = "form", method = RequestMethod.GET)
+    public String delete(@PathVariable("id") Long id) {
+        customersService.delete(id);
+        return "redirect:/list";
+    }
+
+
+
+
+
+
+
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.POST)
     public String update(@Valid Customers customers, BindingResult bindingResult, Model uiModel,
                          HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes,

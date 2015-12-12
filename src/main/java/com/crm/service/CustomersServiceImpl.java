@@ -1,8 +1,6 @@
 package com.crm.service;
 
-import com.crm.model.Banks;
 import com.crm.model.Customers;
-import com.crm.repository.BanksRepository;
 import com.crm.repository.CustomersRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +32,8 @@ public class CustomersServiceImpl implements CustomersService {
         return customersRepository.save(customers);
     }
 
-    public Customers remove(Customers customers) {
-        return null;
-//        return customersRepository.delete(customers);
+    public void delete(Long id) {
+        customersRepository.delete(id);
     }
 
     public Page<Customers> findAllByPage(Pageable pageable) {

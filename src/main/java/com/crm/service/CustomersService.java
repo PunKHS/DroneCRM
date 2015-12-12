@@ -13,7 +13,7 @@ public interface CustomersService {
 
     Customers save(Customers customers);
 
-    Customers remove(Customers customers);
+    void delete(Long id);
 
     Page<Customers> findAllByPage(Pageable pageable);
 }

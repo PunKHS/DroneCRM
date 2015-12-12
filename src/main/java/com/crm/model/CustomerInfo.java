@@ -1,57 +1,39 @@
 package com.crm.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "customer_info", schema = "public", catalog = "crm")
 public class CustomerInfo implements Serializable {
-    private Long customers;
-    private Long banks;
+    private Customers customers;
+    private Banks banks;
     private String account;
     private String bik;
     private String okpo;
     private String adress;
 
-    //  Связь с таблицей Customers
-//    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    @JoinColumn(name = "customers_id", nullable = false)
-//    private Customers customers;
-//    public Customers getCustomers() {
-//        return customers;
-//    }
-//    public void setCustomers(Customers customers) {
-//        this.customers = customers;
-//    }
-
-    //  Связь с таблицей Banks
-//    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    @JoinColumn(name = "banks_id", nullable = false)
-//    private Banks banks;
-//    public Banks getBanks() {
-//        return banks;
-//    }
-//    public void setBanks(Banks banks) {
-//        this.banks = banks;
-//    }
-
-//    @ManyToOne
-    @Column(name = "customers_id", nullable = false)
-    public long getCustomers() {
+    @ManyToOne
+    @JsonBackReference("customerInfo")
+    @JoinColumn(name = "customers_id", nullable = false)
+    public Customers getCustomers() {
         return customers;
     }
 
-    public void setCustomers(long customers) {
+    public void setCustomers(Customers customers) {
         this.customers = customers;
     }
 
-//    @ManyToOne
-    @Column(name = "banks_id", nullable = false)
-    public long getBanks() {
+    @ManyToOne
+    @JsonBackReference("customerInfo")
+    @JoinColumn(name = "banks_id", nullable = false)
+    public Banks getBanks() {
         return banks;
     }
 
-    public void setBanks(long banks) {
+    public void setBanks(Banks banks) {
         this.banks = banks;
     }
 

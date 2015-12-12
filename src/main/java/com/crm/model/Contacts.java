@@ -1,11 +1,14 @@
 package com.crm.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +21,7 @@ public class Contacts implements Serializable {
     private String email;
     private Date bdate;
     private String note;
+    public Set<CustomerEvents> customerEvents = new HashSet<CustomerEvents>();
 
     @Id
     @GeneratedValue(generator = "contacts_seq", strategy = GenerationType.SEQUENCE)
@@ -31,8 +35,7 @@ public class Contacts implements Serializable {
         this.id = id;
     }
 
-//    @ManyToOne
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonBackReference("contacts")
     @JoinColumn(name = "customers_id", nullable = false)
     public Customers getCustomers() {
@@ -91,5 +94,16 @@ public class Contacts implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    // Связь с таблицей CustomerEvents
+    @OneToMany(mappedBy = "contacts", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("customerEvents")
+    public Set<CustomerEvents> getCustomerEvents() {
+        return customerEvents;
+    }
+
+    public void setCustomerEvents(Set<CustomerEvents> customerEvents) {
+        this.customerEvents = customerEvents;
     }
 }
