@@ -37,8 +37,12 @@
             </div>
             <p/>
 
-            <button type="submit">Save</button>
-            <button type="reset">Reset</button>
+            <!--<button type="submit">Save</button>-->
+            <button type="submit" class="btn btn-success btn-sm" aria-expanded="false" aria-haspopup="true">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save
+            </button>
+            <button type="button" class="btn btn-default btn-sm">Reset</button>
+            <!--<button type="reset">Reset</button>-->
 
         </form:form>
     </div>

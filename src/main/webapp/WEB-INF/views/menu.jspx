@@ -29,13 +29,13 @@
         <div id="login">
             <form name="loginForm" action="${loginUrl}" method="post">
                 <table>
-                    <caption align="left">Login:</caption>
+                    <caption align="left">Авторизация:</caption>
                     <tr>
-                        <td>User Name:</td>
+                        <td>Логин:</td>
                         <td><input type="text" name="j_username"/></td>
                     </tr>
                     <tr>
-                        <td>Password:</td>
+                        <td>Пароль:</td>
                         <td><input type="password" name="j_password"/></td>
                     </tr>
                     <tr>

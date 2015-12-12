@@ -5,9 +5,7 @@
     <jsp:output omit-xml-declaration="yes" />
 
     <spring:message code="home_text" var="homeText"/>
-    <spring:message code="label_en_US" var="labelEnUs"/>
-    <spring:message code="label_zh_HK" var="labelZhHk"/>
-    <spring:url value="/banks" var="homeUrl"/>
+    <spring:url value="/customers" var="homeUrl"/>
 
     <a href="${homeUrl}">${homeText}</a>
 </div>

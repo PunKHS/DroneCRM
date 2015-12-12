@@ -34,6 +34,11 @@ public class CustomersServiceImpl implements CustomersService {
         return customersRepository.save(customers);
     }
 
+    public Customers remove(Customers customers) {
+        return null;
+//        return customersRepository.delete(customers);
+    }
+
     public Page<Customers> findAllByPage(Pageable pageable) {
         return customersRepository.findAll(pageable);
     }

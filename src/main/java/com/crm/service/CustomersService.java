@@ -11,7 +11,9 @@ public interface CustomersService {
 
     Customers findById(Long id);
 
-    Customers save(Customers banks);
+    Customers save(Customers customers);
+
+    Customers remove(Customers customers);
 
     Page<Customers> findAllByPage(Pageable pageable);
 }

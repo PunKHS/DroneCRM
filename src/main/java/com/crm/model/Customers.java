@@ -1,8 +1,13 @@
 package com.crm.model;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -11,6 +16,7 @@ import javax.validation.constraints.Size;
 public class Customers implements Serializable {
     private Long id;
     private String name;
+    public Set<Contacts> contacts = new HashSet<Contacts>();
 
     @Id
     @GeneratedValue(generator = "customers_seq", strategy = GenerationType.SEQUENCE)
@@ -34,5 +40,27 @@ public class Customers implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    // Связь с таблицей Contacts
+    @OneToMany(mappedBy = "customers", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("contacts")
+    public Set<Contacts> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Set<Contacts> contacts) {
+        this.contacts = contacts;
+    }
+
+    // Добавление нового контактного лица
+    public void addContacts(Contacts contacts) {
+        contacts.setCustomers(this);
+        getContacts().add(contacts);
+    }
+
+    // Удаление контакта
+    public void removeContacts(Contacts contacts) {
+        getContacts().remove(contacts);
     }
 }
