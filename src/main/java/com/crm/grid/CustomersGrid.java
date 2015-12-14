@@ -38,7 +38,7 @@ public class CustomersGrid {
         return customersData;
     }
 
-    public void setCustomersData(List<Customers> banksData) {
-        this.customersData = banksData;
+    public void setCustomersData(List<Customers> customersData) {
+        this.customersData = customersData;
     }
 }

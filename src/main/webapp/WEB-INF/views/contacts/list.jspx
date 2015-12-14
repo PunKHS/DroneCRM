@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:spring="http://www.springframework.org/tags"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_contacts_list" var="labelContactsList"/>
+    <spring:message code="label_contacts_id" var="labelContactsID"/>
+    <spring:message code="label_contacts_name" var="labelContactsName"/>
+    <spring:url value="/contacts/" var="showContactsUrl"/>
+
+    <!--<h1>${labelContactsList}</h1>-->
+
+    <script type="text/javascript">
+        $(function(){
+            $("#list").jqGrid({
+                url:'${showContactsUrl}/listgrid',
+                datatype: 'json',
+                mtype: 'GET',
+                colNames:['${labelContactsName}'],
+                colModel :[
+                    {name:'name', index:'name', width:500}
+                ],
+                jsonReader : {
+                    root:"contactsData",
+                    page: "currentPage",
+                    total: "totalPages",
+                    records: "totalRecords",
+                    repeatitems: false,
+                    id: "id"
+                },
+                pager: '#pager',
+                rowNum:10,
+                rowList:[10,20,30],
+                sortname: 'name',
+                sortorder: 'desc',
+                viewrecords: true,
+                gridview: true,
+                height: 250,
+                width: 500,
+                caption: '${labelContactsList}',
+                onSelectRow: function(id){
+                    document.location.href ="${showContactsUrl}/" + id;
+                }
+            });
+        });
+    </script>
+
+    <!--<c:if test="${not empty contacts}">-->
+        <!--<table id="list">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Код</th>-->
+                <!--<th>Название</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<c:forEach items="${contacts}" var="contacts">-->
+                <!--<tr>-->
+                    <!--<td><a href="${ showContactsUrl }/${ contacts.id }">-->
+                        <!--${ contacts.id }</a></td>-->
+                    <!--&lt;!&ndash;<td>${contacts.id}</td>&ndash;&gt;-->
+                    <!--<td>${contacts.name}</td>-->
+                <!--</tr>-->
+            <!--</c:forEach>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</c:if>-->
+    <div>
+        <table id="list"><tr><td/></tr></table>
+    </div>
+    <div id="pager"></div>
+</div>

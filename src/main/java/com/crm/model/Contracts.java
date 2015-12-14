@@ -14,7 +14,7 @@ public class Contracts implements Serializable {
     private String number;
     private Orders orders;
     private String note;
-    private Serializable isSign;
+//    private Serializable isSign;
 
     @Id
     @GeneratedValue(generator = "contracts_seq", strategy = GenerationType.SEQUENCE)
@@ -50,7 +50,7 @@ public class Contracts implements Serializable {
 
     @ManyToOne
     @JsonBackReference("orders")
-    @JoinColumn(name = "orders_id", nullable = false)
+    @JoinColumn(name = "orders_id", unique = true, nullable = false)
     public Orders getOrders() {
         return orders;
     }
@@ -69,13 +69,13 @@ public class Contracts implements Serializable {
         this.note = note;
     }
 
-    @Basic
-    @Column(name = "is_sign", nullable = false)
-    public Serializable getIsSign() {
-        return isSign;
-    }
-
-    public void setIsSign(Serializable isSign) {
-        this.isSign = isSign;
-    }
+//    @Basic
+//    @Column(name = "is_sign", nullable = false)
+//    public Serializable getIsSign() {
+//        return isSign;
+//    }
+//
+//    public void setIsSign(Serializable isSign) {
+//        this.isSign = isSign;
+//    }
 }

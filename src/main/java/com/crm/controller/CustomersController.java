@@ -52,21 +52,12 @@ public class CustomersController {
         return "customers/show";
     }
 
-
-
-
     @RequestMapping(value = "/delete/{id}", params = "form", method = RequestMethod.GET)
-//    @RequestMapping(value = { "/delete/{id}" }, params = "form", method = RequestMethod.GET)
     public String delete(@PathVariable("id") Long id) {
         customersService.delete(id);
-        return "redirect:/list";
+        logger.info("Customers was delete");
+        return "redirect:/customers/";
     }
-
-
-
-
-
-
 
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.POST)
     public String update(@Valid Customers customers, BindingResult bindingResult, Model uiModel,
@@ -167,7 +158,6 @@ public class CustomersController {
 
         return customersGrid;
     }
-
 
     @Autowired
     public void setCustomersService(CustomersService customersService) {

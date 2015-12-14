@@ -37,8 +37,8 @@
     <script type="text/javascript" src="${ckeditor_jquery_url}"><jsp:text/></script>
 
     <!-- jqGrid -->
-    <spring:url value="/resources/jqgrid/css/ui.jqgrid.css" var="jqgrid_css" />
-    <spring:url value="/resources/jqgrid/js/i18n/grid.locale-en.js"
+    <spring:url value="/resources/jqgrid/css/ui.jqgrid-bootstrap.css" var="jqgrid_css" />
+    <spring:url value="/resources/jqgrid/js/i18n/grid.locale-ru.js"
                 var="jqgrid_locale_url" />
     <spring:url value="/resources/jqgrid/js/jquery.jqGrid.min.js" var="jqgrid_url" />
     <link rel="stylesheet" type="text/css" media="screen" href="${jqgrid_css}" />
