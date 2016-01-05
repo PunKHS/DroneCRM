@@ -4,8 +4,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8" />
     <jsp:output omit-xml-declaration="yes" />
 
-    <spring:message code="home_text" var="homeText"/>
-    <spring:url value="/customers" var="homeUrl"/>
+    <!--<spring:message code="home_text" var="homeText"/>-->
+    <!--<spring:url value="/customers" var="homeUrl"/>-->
 
-    <a href="${homeUrl}">${homeText}</a>
+    <!--<a href="${homeUrl}">${homeText}</a>-->
 </div>

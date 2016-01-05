@@ -8,10 +8,16 @@
 
     <spring:message code="label_contacts_list" var="labelContactsList"/>
     <spring:message code="label_contacts_id" var="labelContactsID"/>
+    <spring:message code="label_contacts_new" var="labelContactsNew"/>
     <spring:message code="label_contacts_name" var="labelContactsName"/>
+    <spring:message code="label_contacts_phone" var="labelContactsPhone"/>
+    <spring:message code="label_contacts_email" var="labelContactsEmail"/>
+    <spring:message code="label_contacts_bdate" var="labelContactsBdate"/>
+    <spring:message code="label_contacts_note" var="labelContactsNote"/>
     <spring:url value="/contacts/" var="showContactsUrl"/>
+    <spring:url value="/customers?form" var="addContactsUrl"/>
 
-    <!--<h1>${labelContactsList}</h1>-->
+    <h1>${labelContactsList}</h1>
 
     <script type="text/javascript">
         $(function(){
@@ -19,9 +25,21 @@
                 url:'${showContactsUrl}/listgrid',
                 datatype: 'json',
                 mtype: 'GET',
-                colNames:['${labelContactsName}'],
+                colNames:[
+                    '${labelContactsName}',
+//                    '${labelContactsName}',
+                    '${labelContactsPhone}',
+                    '${labelContactsEmail}',
+                    '${labelContactsBdate}',
+                    '${labelContactsNote}'
+                ],
                 colModel :[
-                    {name:'name', index:'name', width:500}
+                    {name:'name', index:'name', width:100},
+//                    {name:'customers.name', index:'customers.name', width:100},
+                    {name:'phone', index:'phone', width:100},
+                    {name:'email', index:'email', width:100},
+                    {name:'bdate', index:'bdate', width:100},
+                    {name:'note', index:'note', width:100}
                 ],
                 jsonReader : {
                     root:"contactsData",
@@ -35,12 +53,12 @@
                 rowNum:10,
                 rowList:[10,20,30],
                 sortname: 'name',
-                sortorder: 'desc',
+                sortorder: 'asc',
                 viewrecords: true,
                 gridview: true,
                 height: 250,
-                width: 500,
-                caption: '${labelContactsList}',
+                width: 650,
+//                caption: '${labelContactsList}',
                 onSelectRow: function(id){
                     document.location.href ="${showContactsUrl}/" + id;
                 }
@@ -68,6 +86,11 @@
             <!--</tbody>-->
         <!--</table>-->
     <!--</c:if>-->
+
+    <div class="btn-group" >
+        <button class="btn" onclick="location.href='${addContactsUrl}'"><span class="glyphicon glyphicon-plus"></span>${labelContactsNew}</button>
+    </div>
+
     <div>
         <table id="list"><tr><td/></tr></table>
     </div>

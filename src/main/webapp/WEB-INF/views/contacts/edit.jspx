@@ -11,7 +11,12 @@
 
     <spring:message code="label_contacts_new" var="labelContactsNew"/>
     <spring:message code="label_contacts_name" var="labelContactsName"/>
+    <spring:message code="label_contacts_customers" var="labelContactsCustomers"/>
+    <spring:message code="label_contacts_phone" var="labelContactsPhone"/>
+    <spring:message code="label_contacts_email" var="labelContactsEmail"/>
+    <spring:message code="label_contacts_note" var="labelContactsNote"/>
     <spring:message code="label_contacts_update" var="labelContactsUpdate"/>
+    <spring:message code="label_contacts_bdate" var="labelContactsBdate"/>
 
     <!-- Проверка редактирование/обновление -->
     <spring:eval expression="contacts.id == null ? labelContactsNew:labelContactsUpdate" var="formTitle"/>
@@ -27,22 +32,79 @@
                 <div id="message" class="${message.type}">${message.message}</div>
             </c:if>
 
-            <form:label path="name">
-                ${labelContactsName}*
-            </form:label>
-            <form:input path="name"/>
+
+            <table>
+                <tr>
+                    <td><form:label path="name">${labelContactsName}*</form:label></td>
+                    <td><form:input path="name"/></td>
+                </tr>
+
+                <tr>
+                    <td><form:label path="customers.name">${labelContactsCustomers}*</form:label></td>
+                    <td><form:input path="customers.id"/></td>
+                    <!--<td>-->
+                        <!--<form:select path="customers">-->
+                            <!--<form:option value="-" label="Please Select"/>-->
+                            <!--<form:options items="${customers}" itemValue="id" itemLabel="name"/>-->
+                        <!--</form:select>-->
+                    <!--</td>-->
+                </tr>
+
+                <tr>
+                    <td><form:label path="phone">${labelContactsPhone}*</form:label></td>
+                    <td><form:input path="phone"/></td>
+                </tr>
+
+                <tr>
+                    <td><form:label path="email">${labelContactsEmail}*</form:label></td>
+                    <td><form:input path="email"/></td>
+                </tr>
+
+                <tr>
+                    <td><form:label path="bdate">${labelContactsBdate}*</form:label></td>
+                    <td><form:input path="bdate"/></td>
+                </tr>
+
+                <tr>
+                    <td><form:label path="note">${labelContactsNote}*</form:label></td>
+                    <td><form:input path="note"/></td>
+                </tr>
+            </table>
+
+            <!--<form:label path="name">-->
+                <!--${labelContactsName}*-->
+            <!--</form:label>-->
+            <!--<form:input path="name"/>-->
+
+            <!--<form:label path="phone">-->
+                <!--${labelContactsPhone}*-->
+            <!--</form:label>-->
+            <!--<form:input path="phone"/>-->
+
+            <!--<form:label path="email">-->
+                <!--${labelContactsEmail}*-->
+            <!--</form:label>-->
+            <!--<form:input path="email"/>-->
+
+            <!--<form:label path="note">-->
+                <!--${labelContactsNote}-->
+            <!--</form:label>-->
+            <!--<form:input path="note"/>-->
 
             <div>
                 <form:errors path="name" cssClass="error"/>
+                <form:errors path="phone" cssClass="error"/>
+                <form:errors path="email" cssClass="error"/>
+                <form:errors path="bdate" cssClass="error"/>
             </div>
             <p/>
 
-            <!--<button type="submit">Save</button>-->
-            <button type="submit" class="btn btn-success btn-sm" aria-expanded="false" aria-haspopup="true">
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save
-            </button>
-            <button type="button" class="btn btn-default btn-sm">Reset</button>
-            <!--<button type="reset">Reset</button>-->
+            <button type="submit">Save</button>
+            <button type="reset">Reset</button>
+            <!--<button type="submit" class="btn btn-success btn-sm" aria-expanded="false" aria-haspopup="true">-->
+            <!--<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save-->
+            <!--</button>-->
+            <!--<button type="button" class="btn btn-default btn-sm">Reset</button>-->
 
         </form:form>
     </div>

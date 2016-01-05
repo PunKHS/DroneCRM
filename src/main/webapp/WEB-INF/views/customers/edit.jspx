@@ -31,18 +31,20 @@
                 ${labelCustomersName}*
             </form:label>
             <form:input path="name"/>
-
+            <!--<div>-->
+            <!--<form:input type="text" class="form-control" path="name" placeholder="${labelCustomersName}*"/>-->
+            <!--</div>-->
             <div>
                 <form:errors path="name" cssClass="error"/>
             </div>
             <p/>
 
-            <!--<button type="submit">Save</button>-->
-            <button type="submit" class="btn btn-success btn-sm" aria-expanded="false" aria-haspopup="true">
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save
-            </button>
-            <button type="button" class="btn btn-default btn-sm">Reset</button>
-            <!--<button type="reset">Reset</button>-->
+            <button type="submit">Save</button>
+            <!--<button type="submit" class="btn btn-success btn-sm" aria-expanded="false" aria-haspopup="true">-->
+                <!--<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save-->
+            <!--</button>-->
+            <!--<button type="button" class="btn btn-default btn-sm">Reset</button>-->
+            <button type="reset">Reset</button>
 
         </form:form>
     </div>

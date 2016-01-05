@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_orders_info" var="labelOrdersInfo"/>
+
+    <spring:message code="label_orders_id" var="labelOrdersID"/>
+    <spring:message code="label_orders_date" var="labelOrdersDate"/>
+    <spring:message code="label_orders_number" var="labelOrdersNumber"/>
+    <spring:message code="label_orders_note" var="labelOrdersNote"/>
+    <spring:message code="label_orders_customers" var="labelOrdersCustomers"/>
+
+    <spring:message code="label_orders_update" var="labelOrdersUpdate"/>
+    <spring:message code="label_orders_delete" var="labelOrdersDelete"/>
+
+    <spring:url value="/orders" var="editOrdersUrl"/>
+    <spring:url value="/orders/delete" var="deleteOrdersUrl"/>
+
+    <h1>${labelOrdersInfo}</h1>
+
+    <div class="btn-group" >
+        <button class="btn" onclick="location.href='${editOrdersUrl}/${orders.id}?form'"><span class="glyphicon glyphicon-pencil"></span>${labelOrdersUpdate}</button>
+        <button class="btn" onclick="location.href='${deleteOrdersUrl}/${orders.id}?form'"><span class="glyphicon glyphicon-trash"></span>${labelOrdersDelete}</button>
+    </div>
+
+    <div id="ordersInfo">
+
+        <c:if test="${not empty message}">
+            <div id="message" class="${message.type}">${message.message}</div>
+        </c:if>
+
+        <table>
+            <tr>
+                <td>${labelOrdersID}</td>
+                <td>${orders.id}</td>
+            </tr>
+            <tr>
+                <td>${labelOrdersDate}</td>
+                <td>${orders.date}</td>
+            </tr>
+            <tr>
+                <td>${labelOrdersNumber}</td>
+                <td>${orders.number}</td>
+            </tr>
+            <tr>
+                <td>${labelOrdersCustomers}</td>
+                <td>${orders.customers.name}</td>
+            </tr>
+            <tr>
+                <td>${labelOrdersNote}</td>
+                <td>${orders.note}</td>
+            </tr>
+        </table>
+
+        <!--<a href="${editOrdersUrl}/${orders.id}?form">${labelOrdersUpdate}</a>-->
+        <!--<a href="${deleteOrdersUrl}/${orders.id}?form">${labelOrdersDelete}</a>-->
+    </div>
+</div>

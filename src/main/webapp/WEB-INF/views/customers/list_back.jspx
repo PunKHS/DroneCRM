@@ -12,7 +12,6 @@
     <spring:url value="/customers/" var="showCustomersUrl"/>
 
     <!--<h1>${labelCustomersList}</h1>-->
-
     <script type="text/javascript">
         $(function(){
             $("#list").jqGrid({
@@ -41,51 +40,11 @@
                 height: 250,
                 width: 500,
                 caption: '${labelCustomersList}',
-//                onSelectRow: function(id){
-//                    document.location.href ="${showCustomersUrl}/" + id;
-//                }
-                onSelectRow: function(rowid, selected) {
-                    if(rowid != null) {
-                        jQuery("#jqGridDetails").jqGrid('setGridParam',{url: rowid + ".json",datatype: 'json'}); // the last setting is for demo only
-                        jQuery("#jqGridDetails").jqGrid('setCaption', 'Detail Grid::'+ rowid);
-                        jQuery("#jqGridDetails").trigger("reloadGrid");
-                    }
-                }, // use the onSelectRow that is triggered on row click to show a details grid
-                onSortCol : clearSelection,
-                onPaging : clearSelection,
+                onSelectRow: function(id){
+                    document.location.href ="${showCustomersUrl}/" + id;
+                }
             });
         });
-
-        // detail grid
-        $("#jqGridDetails").jqGrid({
-            url: 'empty.json',
-            datatype: "json",
-            mtype: "GET",
-            page: 1,
-            colNames:['${labelContactsName}'], // --------------!!!!!!!!!!!!!!!!1
-            colModel: [
-                { label: 'Order ID', name: 'OrderID', key: true, width: 75 },
-                { label: 'Required Date', name: 'RequiredDate', width: 100 },
-                { label: 'Ship Name', name: 'ShipName', width: 100 },
-                { label: 'Ship City', name: 'ShipCity', width: 100 },
-                { label: 'Freight', name: 'Freight', width: 75 }
-            ],
-            width: 780,
-            rowNum: 5,
-            loadonce: true,
-            height: '100',
-            viewrecords: true,
-            caption: 'Detail grid::',
-            pager: "#jqGridDetailsPager"
-        });
-
-        function clearSelection() {
-            jQuery("#jqGridDetails").jqGrid('setGridParam',{url: "empty.json", datatype: 'json'}); // the last setting is for demo purpose only
-            jQuery("#jqGridDetails").jqGrid('setCaption', 'Detail Grid:: none');
-            jQuery("#jqGridDetails").trigger("reloadGrid");
-
-        }
-
     </script>
 
     <!--<c:if test="${not empty customers}">-->

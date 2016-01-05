@@ -10,6 +10,12 @@
     <spring:message code="label_contacts_info" var="labelContactsInfo"/>
     <spring:message code="label_contacts_id" var="labelContactsID"/>
     <spring:message code="label_contacts_name" var="labelContactsName"/>
+    <spring:message code="label_contacts_customers" var="labelContactsCustomers"/>
+    <spring:message code="label_contacts_phone" var="labelContactsPhone"/>
+    <spring:message code="label_contacts_email" var="labelContactsEmail"/>
+    <spring:message code="label_contacts_bdate" var="labelContactsBdate"/>
+    <spring:message code="label_contacts_note" var="labelContactsNote"/>
+
     <spring:message code="label_contacts_update" var="labelContactsUpdate"/>
     <spring:message code="label_contacts_delete" var="labelContactsDelete"/>
 
@@ -17,6 +23,11 @@
     <spring:url value="/contacts/delete" var="deleteContactsUrl"/>
 
     <h1>${labelContactsInfo}</h1>
+
+    <div class="btn-group" >
+        <button class="btn" onclick="location.href='${editContactsUrl}/${contacts.id}?form'"><span class="glyphicon glyphicon-pencil"></span>${labelContactsUpdate}</button>
+        <button class="btn" onclick="location.href='${deleteContactsUrl}/${contacts.id}?form'"><span class="glyphicon glyphicon-trash"></span>${labelContactsDelete}</button>
+    </div>
 
     <div id="contactsInfo">
 
@@ -30,12 +41,28 @@
                 <td>${contacts.id}</td>
             </tr>
             <tr>
-                <td>${labelContactsName}</td>
-                <td>${contacts.name}</td>
+                <td>${labelContactsCustomers}</td>
+                <td>${contacts.customers.name}</td>
+            </tr>
+            <tr>
+                <td>${labelContactsPhone}</td>
+                <td>${contacts.phone}</td>
+            </tr>
+            <tr>
+                <td>${labelContactsEmail}</td>
+                <td>${contacts.email}</td>
+            </tr>
+            <tr>
+                <td>${labelContactsBdate}</td>
+                <td>${contacts.bdate}</td>
+            </tr>
+            <tr>
+                <td>${labelContactsNote}</td>
+                <td>${contacts.note}</td>
             </tr>
         </table>
 
-        <a href="${editContactsUrl}/${contacts.id}?form">${labelContactsUpdate}</a>
-        <a href="${deleteContactsUrl}/${contacts.id}?form">${labelContactsDelete}</a>
+        <!--<a href="${editContactsUrl}/${contacts.id}?form">${labelContactsUpdate}</a>-->
+        <!--<a href="${deleteContactsUrl}/${contacts.id}?form">${labelContactsDelete}</a>-->
     </div>
 </div>

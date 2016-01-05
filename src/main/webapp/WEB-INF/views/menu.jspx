@@ -9,20 +9,25 @@
     <jsp:output omit-xml-declaration="yes" />
 
     <spring:message code="menu_header_text" var="menuHeaderText"/>
-    <spring:message code="menu_add_customers" var="menuAddCustomers"/>
+    <spring:message code="menu_customers" var="menuCustomers"/>
+    <spring:message code="menu_contacts" var="menuContacts"/>
+    <spring:message code="menu_orders" var="menuOrders"/>
     <spring:message code="label_login" var="labelLogin"/>
-    <spring:url value="/customers?form" var="addCustomersUrl"/>
+    <spring:url value="/customers/" var="showCustomersUrl"/>
+    <spring:url value="/contacts/" var="showContactsUrl"/>
+    <spring:url value="/orders/" var="showOrdersUrl"/>
 
     <!-- Авторизация пользователя -->
     <spring:message code="label_login" var="labelLogin"/>
     <spring:url var="loginUrl" value="/j_spring_security_check" />
 
-    <h3>${menuHeaderText}</h3>
-    <!--<a href="${addCustomersUrl}"><h3>${menuAddCustomers}</h3></a>-->
+    <!--<h3>${menuHeaderText}</h3>-->
 
     <!-- Авторизация пользователя -->
     <sec:authorize access="hasRole('ROLE_USER')">
-        <a href="${addCustomersUrl}"><h3>${menuAddCustomers}</h3></a>
+        <a href="${showCustomersUrl}"><h3>${menuCustomers}</h3></a>
+        <a href="${showContactsUrl}"><h3>${menuContacts}</h3></a>
+        <a href="${showOrdersUrl}"><h3>${menuOrders}</h3></a>
     </sec:authorize>
 
     <sec:authorize access="isAnonymous()">

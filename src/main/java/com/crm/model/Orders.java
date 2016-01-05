@@ -1,7 +1,9 @@
 package com.crm.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -35,6 +37,7 @@ public class Orders implements Serializable {
     }
 
     @Basic
+    @JsonFormat(pattern="dd.MM.yy hh:mm:ss")
     @Column(name = "date", unique = true, nullable = true)
     public Timestamp getDate() {
         return date;

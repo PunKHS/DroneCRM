@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:spring="http://www.springframework.org/tags"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_orders_list" var="labelOrdersList"/>
+    <spring:message code="label_orders_id" var="labelOrdersID"/>
+    <spring:message code="label_orders_date" var="labelOrdersDate"/>
+    <spring:message code="label_orders_number" var="labelOrdersNumber"/>
+    <spring:message code="label_orders_note" var="labelOrdersNote"/>
+    <spring:message code="label_orders_new" var="labelOrdersNew"/>
+    <!--<spring:message code="label_orders_update" var="labelOrdersUpdate"/>-->
+    <!--<spring:message code="label_orders_delete" var="labelOrdersDelete"/>-->
+    <spring:url value="/orders/" var="showOrdersUrl"/>
+    <spring:url value="/orders?form" var="addOrdersUrl"/>
+
+    <h1>${labelOrdersList}</h1>
+    <script type="text/javascript">
+        $(function(){
+            $("#list").jqGrid({
+                url:'${showOrdersUrl}/listgrid',
+                datatype: 'json',
+                mtype: 'GET',
+                colNames:[
+                    '${labelOrdersDate}',
+                    '${labelOrdersNumber}',
+                    '${labelOrdersNote}'
+                ],
+                colModel :[
+                    {name:'date', index:'date', width:200},
+                    {name:'number', index:'number', width:200},
+                    {name:'note', index:'note', width:250}
+                ],
+                jsonReader : {
+                    root:"ordersData",
+                    page: "currentPage",
+                    total: "totalPages",
+                    records: "totalRecords",
+                    repeatitems: false,
+                    id: "id"
+                },
+                pager: '#pager',
+                rowNum:10,
+                rowList:[10,20,30],
+                sortname: 'number',
+                sortorder: 'asc',
+                viewrecords: true,
+                gridview: true,
+                height: 250,
+                width: 650,
+                //caption: '${labelOrdersList}',
+                onSelectRow: function(id){
+                    document.location.href ="${showOrdersUrl}/" + id;
+                }
+            });
+        });
+    </script>
+
+    <!--<c:if test="${not empty orders}">-->
+        <!--<table id="list">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Код</th>-->
+                <!--<th>Название</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<c:forEach items="${orders}" var="orders">-->
+                <!--<tr>-->
+                    <!--<td><a href="${ showOrdersUrl }/${ orders.id }">-->
+                        <!--${ orders.id }</a></td>-->
+                    <!--&lt;!&ndash;<td>${orders.id}</td>&ndash;&gt;-->
+                    <!--<td>${orders.name}</td>-->
+                <!--</tr>-->
+            <!--</c:forEach>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</c:if>-->
+    <div class="btn-group" >
+        <button class="btn" onclick="location.href='${addOrdersUrl}'"><span class="glyphicon glyphicon-plus"></span>${labelOrdersNew}</button>
+    </div>
+    <div>
+        <table id="list"><tr><td/></tr></table>
+    </div>
+    <div id="pager"></div>
+</div>

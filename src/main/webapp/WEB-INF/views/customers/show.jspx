@@ -18,6 +18,11 @@
 
     <h1>${labelCustomersInfo}</h1>
 
+    <div class="btn-group" >
+        <button class="btn" onclick="location.href='${editCustomersUrl}/${customers.id}?form'"><span class="glyphicon glyphicon-pencil"></span>${labelCustomersUpdate}</button>
+        <button class="btn" onclick="location.href='${deleteCustomersUrl}/${customers.id}?form'"><span class="glyphicon glyphicon-trash"></span>${labelCustomersDelete}</button>
+    </div>
+
     <div id="customersInfo">
 
         <c:if test="${not empty message}">
@@ -35,7 +40,7 @@
             </tr>
         </table>
 
-        <a href="${editCustomersUrl}/${customers.id}?form">${labelCustomersUpdate}</a>
-        <a href="${deleteCustomersUrl}/${customers.id}?form">${labelCustomersDelete}</a>
+        <!--<a href="${editCustomersUrl}/${customers.id}?form">${labelCustomersUpdate}</a>-->
+        <!--<a href="${deleteCustomersUrl}/${customers.id}?form">${labelCustomersDelete}</a>-->
     </div>
 </div>

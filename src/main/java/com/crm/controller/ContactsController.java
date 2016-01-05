@@ -2,7 +2,9 @@ package com.crm.controller;
 
 import com.crm.grid.ContactsGrid;
 import com.crm.model.Contacts;
+import com.crm.model.Customers;
 import com.crm.service.ContactsService;
+import com.crm.service.CustomersService;
 import com.crm.service.UrlUtil;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -21,8 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @RequestMapping("/contacts")
 @Controller
@@ -35,20 +36,35 @@ public class ContactsController {
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model uiModel) {
         logger.info("Listing contacts");
-
         List<Contacts> contacts = contactsService.findAll();
         uiModel.addAttribute("contacts", contacts);
-
         logger.info("No. of contacts: " + contacts.size());
 
         return "contacts/list";
     }
 
+//    @ModelAttribute("customers")
+//    public Map<Long, String> customers() {
+//        logger.info("ma1: ");
+//        Map<Long, String> result = new HashMap<Long, String>();
+//        List<Customers> customersList = customersService.findAll();
+////        result.put(1, "AAA");
+////        result.put(2, "BBB");
+////        result.put(3, "CCc");
+////        result.put(customers.getId(), customers.getName());
+//        for(Customers cus : customersList){
+//            result.put(cus.getId(), cus.getName());
+//        }
+//
+//        logger.info("ma2: ");
+//        return result;
+//    }
+
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Long id, Model uiModel) {
         Contacts contacts = contactsService.findById(id);
         uiModel.addAttribute("contacts", contacts);
-
         return "contacts/show";
     }
 
@@ -115,9 +131,9 @@ public class ContactsController {
     @ResponseBody
     @RequestMapping(value = "/listgrid", method = RequestMethod.GET, produces = "application/json")
     public ContactsGrid listGrid(@RequestParam(value = "page", required = false) Integer page,
-                                  @RequestParam(value = "rows", required = false) Integer rows,
-                                  @RequestParam(value = "sidx", required = false) String sortBy,
-                                  @RequestParam(value = "sord", required = false) String order) {
+                                 @RequestParam(value = "rows", required = false) Integer rows,
+                                 @RequestParam(value = "sidx", required = false) String sortBy,
+                                 @RequestParam(value = "sord", required = false) String order) {
 
         logger.info("Listing contacts for grid with page: {}, rows: {}", page, rows);
         logger.info("Listing contacts for grid with sort: {}, order: {}", sortBy, order);

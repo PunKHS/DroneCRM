@@ -9,10 +9,13 @@
     <spring:message code="label_customers_list" var="labelCustomersList"/>
     <spring:message code="label_customers_id" var="labelCustomersID"/>
     <spring:message code="label_customers_name" var="labelCustomersName"/>
+    <spring:message code="label_customers_new" var="labelCustomersNew"/>
+    <!--<spring:message code="label_customers_update" var="labelCustomersUpdate"/>-->
+    <!--<spring:message code="label_customers_delete" var="labelCustomersDelete"/>-->
     <spring:url value="/customers/" var="showCustomersUrl"/>
+    <spring:url value="/customers?form" var="addCustomersUrl"/>
 
-    <!--<h1>${labelCustomersList}</h1>-->
-
+    <h1>${labelCustomersList}</h1>
     <script type="text/javascript">
         $(function(){
             $("#list").jqGrid({
@@ -35,12 +38,12 @@
                 rowNum:10,
                 rowList:[10,20,30],
                 sortname: 'name',
-                sortorder: 'desc',
+                sortorder: 'asc',
                 viewrecords: true,
                 gridview: true,
                 height: 250,
-                width: 500,
-                caption: '${labelCustomersList}',
+                width: 650,
+                //caption: '${labelCustomersList}',
                 onSelectRow: function(id){
                     document.location.href ="${showCustomersUrl}/" + id;
                 }
@@ -68,6 +71,9 @@
             <!--</tbody>-->
         <!--</table>-->
     <!--</c:if>-->
+    <div class="btn-group" >
+        <button class="btn" onclick="location.href='${addCustomersUrl}'"><span class="glyphicon glyphicon-plus"></span>${labelCustomersNew}</button>
+    </div>
     <div>
         <table id="list"><tr><td/></tr></table>
     </div>
