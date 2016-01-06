@@ -12,10 +12,12 @@
     <spring:message code="menu_customers" var="menuCustomers"/>
     <spring:message code="menu_contacts" var="menuContacts"/>
     <spring:message code="menu_orders" var="menuOrders"/>
+    <spring:message code="menu_contracts" var="menuContracts"/>
     <spring:message code="label_login" var="labelLogin"/>
     <spring:url value="/customers/" var="showCustomersUrl"/>
     <spring:url value="/contacts/" var="showContactsUrl"/>
     <spring:url value="/orders/" var="showOrdersUrl"/>
+    <spring:url value="/contracts/" var="showContractsUrl"/>
 
     <!-- Авторизация пользователя -->
     <spring:message code="label_login" var="labelLogin"/>
@@ -28,6 +30,7 @@
         <a href="${showCustomersUrl}"><h3>${menuCustomers}</h3></a>
         <a href="${showContactsUrl}"><h3>${menuContacts}</h3></a>
         <a href="${showOrdersUrl}"><h3>${menuOrders}</h3></a>
+        <a href="${showContractsUrl}"><h3>${menuContracts}</h3></a>
     </sec:authorize>
 
     <sec:authorize access="isAnonymous()">

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:spring="http://www.springframework.org/tags"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_contracts_list" var="labelContractsList"/>
+    <spring:message code="label_contracts_id" var="labelContractsID"/>
+    <spring:message code="label_contracts_date" var="labelContractsDate"/>
+    <spring:message code="label_contracts_number" var="labelContractsNumber"/>
+    <spring:message code="label_contracts_note" var="labelContractsNote"/>
+    <spring:message code="label_contracts_new" var="labelContractsNew"/>
+
+    <spring:url value="/contracts/" var="showContractsUrl"/>
+    <spring:url value="/contracts?form" var="addContractsUrl"/>
+
+    <h1>${labelContractsList}</h1>
+    <script type="text/javascript">
+        $(function(){
+            $("#list").jqGrid({
+                url:'${showContractsUrl}/listgrid',
+                datatype: 'json',
+                mtype: 'GET',
+                colNames:[
+                    '${labelContractsDate}',
+                    '${labelContractsNumber}',
+                    '${labelContractsNote}'
+                ],
+                colModel :[
+                    {name:'date', index:'date', width:200},
+                    {name:'number', index:'number', width:200},
+                    {name:'note', index:'note', width:250}
+                ],
+                jsonReader : {
+                    root:"contractsData",
+                    page: "currentPage",
+                    total: "totalPages",
+                    records: "totalRecords",
+                    repeatitems: false,
+                    id: "id"
+                },
+                pager: '#pager',
+                rowNum:10,
+                rowList:[10,20,30],
+                sortname: 'number',
+                sortorder: 'desc',
+                viewrecords: true,
+                gridview: true,
+                height: 250,
+                width: 650,
+                //caption: '${labelContractsList}',
+                onSelectRow: function(id){
+                    document.location.href ="${showContractsUrl}/" + id;
+                }
+            });
+        });
+    </script>
+
+    <div class="btn-group" >
+        <button class="btn" onclick="location.href='${addContractsUrl}'"><span class="glyphicon glyphicon-plus"></span>${labelContractsNew}</button>
+    </div>
+    <div>
+        <table id="list"><tr><td/></tr></table>
+    </div>
+    <div id="pager"></div>
+</div>

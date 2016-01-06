@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_contracts_new" var="labelContractsNew"/>
+
+    <spring:message code="label_contracts_date" var="labelContractsDate"/>
+    <spring:message code="label_contracts_number" var="labelContractsNumber"/>
+    <spring:message code="label_contracts_orders" var="labelContractsOrders"/>
+    <spring:message code="label_contracts_note" var="labelContractsNote"/>
+
+    <spring:message code="label_contracts_update" var="labelContractsUpdate"/>
+
+    <!-- Проверка редактирование/обновление -->
+    <spring:eval expression="contracts.id == null ? labelContractsNew:labelContractsUpdate" var="formTitle"/>
+    <!--<spring:eval expression="labelContractsUpdate" var="formTitle"/>-->
+
+    <script type="text/javascript">
+        $(function () {
+            $('#contractsDate').datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+//            $("#note").ckeditor(
+//                    {
+//                        toolbar: 'Basic',
+//                        uiColor: '#CCCCCC'
+//                    }
+//            );
+        });
+    </script>
+
+    <h1>${formTitle}</h1>
+
+    <div id="contractsUpdate">
+        <!-- Связь формы с атрибутом модели -->
+        <form:form modelAttribute="contracts" id="contractsUpdateForm" method="POST">
+
+            <c:if test="${not empty message}">
+                <div id="message" class="${message.type}">${message.message}</div>
+            </c:if>
+
+            <table>
+                <tr>
+                    <td><form:label path="date">${labelContractsDate}*</form:label></td>
+                    <td><form:input path="date" id="contractsDate"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="number">${labelContractsNumber}*</form:label></td>
+                    <td><form:input path="number"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="orders.number">${labelContractsOrders}*</form:label></td>
+                    <!--<td><form:input path="customers.id"/></td>-->
+
+                    <td>
+                        <form:select path="orders.id">
+                            <form:options items="${orders}" itemValue="key" itemLabel="value"/>
+                        </form:select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><form:label path="note">${labelContractsNote}*</form:label></td>
+                    <td><form:textarea cols="60" rows="4" path="note" id="note"/></td>
+                    <!--<td><form:input path="note"/></td>-->
+                </tr>
+            </table>
+
+            <div>
+                <form:errors path="date" cssClass="error"/>
+                <form:errors path="number" cssClass="error"/>
+                <form:errors path="orders" cssClass="error"/>
+                <form:errors path="note" cssClass="error"/>
+            </div>
+            <p/>
+
+            <button type="submit">Save</button>
+            <!--<button type="submit" class="btn btn-success btn-sm" aria-expanded="false" aria-haspopup="true">-->
+                <!--<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save-->
+            <!--</button>-->
+            <!--<button type="button" class="btn btn-default btn-sm">Reset</button>-->
+            <button type="reset">Reset</button>
+
+        </form:form>
+    </div>
+</div>

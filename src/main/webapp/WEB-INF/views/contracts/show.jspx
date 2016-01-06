@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_contracts_info" var="labelContractsInfo"/>
+
+    <spring:message code="label_contracts_id" var="labelContractsID"/>
+    <spring:message code="label_contracts_date" var="labelContractsDate"/>
+    <spring:message code="label_contracts_number" var="labelContractsNumber"/>
+    <spring:message code="label_contracts_orders" var="labelContractsOrders"/>
+    <spring:message code="label_contracts_note" var="labelContractsNote"/>
+
+    <spring:message code="label_contracts_update" var="labelContractsUpdate"/>
+    <spring:message code="label_contracts_delete" var="labelContractsDelete"/>
+
+    <spring:url value="/contracts" var="editContractsUrl"/>
+    <spring:url value="/contracts/delete" var="deleteContractsUrl"/>
+
+    <h1>${labelContractsInfo}</h1>
+
+    <div class="btn-group" >
+        <button class="btn" onclick="location.href='${editContractsUrl}/${contracts.id}?form'"><span class="glyphicon glyphicon-pencil"></span>${labelContractsUpdate}</button>
+        <button class="btn" onclick="location.href='${deleteContractsUrl}/${contracts.id}?form'"><span class="glyphicon glyphicon-trash"></span>${labelContractsDelete}</button>
+    </div>
+
+    <div id="contractsInfo">
+
+        <c:if test="${not empty message}">
+            <div id="message" class="${message.type}">${message.message}</div>
+        </c:if>
+
+        <table>
+            <tr>
+                <td>${labelContractsID}</td>
+                <td>${contracts.id}</td>
+            </tr>
+            <tr>
+                <td>${labelContractsDate}</td>
+                <td>${contracts.date}</td>
+            </tr>
+            <tr>
+                <td>${labelContractsNumber}</td>
+                <td>${contracts.number}</td>
+            </tr>
+            <tr>
+                <td>${labelContractsOrders}</td>
+                <td>${contracts.orders.number}</td>
+            </tr>
+            <tr>
+                <td>${labelContractsNote}</td>
+                <td>${contracts.note}</td>
+            </tr>
+        </table>
+
+        <!--<a href="${editContractsUrl}/${contracts.id}?form">${labelContractsUpdate}</a>-->
+        <!--<a href="${deleteContractsUrl}/${contracts.id}?form">${labelContractsDelete}</a>-->
+    </div>
+</div>
