@@ -37,11 +37,11 @@
                     <caption align="left">Авторизация:</caption>
                     <tr>
                         <td>Логин:</td>
-                        <td><input type="text" name="j_username"/></td>
+                        <td><input type="text" name="j_username" value="sidorov"/></td>
                     </tr>
                     <tr>
                         <td>Пароль:</td>
-                        <td><input type="password" name="j_password"/></td>
+                        <td><input type="password" name="j_password" value="sidorov"/></td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center"><input name="submit" type="submit"

@@ -2,8 +2,10 @@ package com.crm.service;
 
 import com.crm.model.Customers;
 import com.crm.model.Orders;
+import com.crm.model.Users;
 import com.crm.repository.CustomersRepository;
 import com.crm.repository.OrdersRepository;
+import com.crm.repository.UsersRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,7 @@ import java.util.List;
 public class OrdersServiceImpl implements OrdersService {
     private OrdersRepository ordersRepository;
     private CustomersRepository customersRepository;
+    private UsersRepository usersRepository;
 
     @Transactional(readOnly = true)
     public List<Orders> findAll() {
@@ -48,6 +51,11 @@ public class OrdersServiceImpl implements OrdersService {
         return Lists.newArrayList(customersRepository.findAll());
     }
 
+    @Transactional(readOnly = true)
+    public List<Users> getAllUsers() {
+        return Lists.newArrayList(usersRepository.findAll());
+    }
+
     @Autowired
     public void setOrdersRepository(OrdersRepository ordersRepository) {
         this.ordersRepository = ordersRepository;
@@ -56,5 +64,10 @@ public class OrdersServiceImpl implements OrdersService {
     @Autowired
     public void setCustomersRepository(CustomersRepository customersRepository) {
         this.customersRepository = customersRepository;
+    }
+
+    @Autowired
+    public void setUsersRepository(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
     }
 }

@@ -4,7 +4,6 @@ import com.crm.grid.ContactsGrid;
 import com.crm.model.Contacts;
 import com.crm.model.Customers;
 import com.crm.service.ContactsService;
-import com.crm.service.CustomersService;
 import com.crm.service.UrlUtil;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -43,24 +42,6 @@ public class ContactsController {
         return "contacts/list";
     }
 
-//    @ModelAttribute("customers")
-//    public Map<Long, String> customers() {
-//        logger.info("ma1: ");
-//        Map<Long, String> result = new HashMap<Long, String>();
-//        List<Customers> customersList = customersService.findAll();
-////        result.put(1, "AAA");
-////        result.put(2, "BBB");
-////        result.put(3, "CCc");
-////        result.put(customers.getId(), customers.getName());
-//        for(Customers cus : customersList){
-//            result.put(cus.getId(), cus.getName());
-//        }
-//
-//        logger.info("ma2: ");
-//        return result;
-//    }
-
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Long id, Model uiModel) {
         Contacts contacts = contactsService.findById(id);
@@ -98,6 +79,22 @@ public class ContactsController {
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("contacts", contactsService.findById(id));
+        try {
+            Set<Map.Entry<Long, String>> customers;
+            List<Customers> customersList = contactsService.getAllCustomers();
+            final Map<Long, String> customersMap = new HashMap<Long, String>();
+            if (customersList != null && !customersList.isEmpty()) {
+                for (Customers eachCustomer : customersList) {
+                    if (eachCustomer != null) {
+                        customersMap.put(eachCustomer.getId(), eachCustomer.getName());
+                    }
+                }
+            }
+            customers = customersMap.entrySet();
+            uiModel.addAttribute("customers", customers);
+        } catch (Exception ex){
+            logger.warn(ex.toString());
+        }
         return "contacts/update";
     }
 
@@ -123,7 +120,22 @@ public class ContactsController {
     public String createForm(Model uiModel) {
         Contacts contacts = new Contacts();
         uiModel.addAttribute("contacts", contacts);
-
+        try {
+            Set<Map.Entry<Long, String>> customers;
+            List<Customers> customersList = contactsService.getAllCustomers();
+            final Map<Long, String> customersMap = new HashMap<Long, String>();
+            if (customersList != null && !customersList.isEmpty()) {
+                for (Customers eachCustomer : customersList) {
+                    if (eachCustomer != null) {
+                        customersMap.put(eachCustomer.getId(), eachCustomer.getName());
+                    }
+                }
+            }
+            customers = customersMap.entrySet();
+            uiModel.addAttribute("customers", customers);
+        } catch (Exception ex){
+            logger.warn(ex.toString());
+        }
         return "contacts/create";
     }
 

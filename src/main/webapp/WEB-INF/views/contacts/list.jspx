@@ -15,7 +15,7 @@
     <spring:message code="label_contacts_bdate" var="labelContactsBdate"/>
     <spring:message code="label_contacts_note" var="labelContactsNote"/>
     <spring:url value="/contacts/" var="showContactsUrl"/>
-    <spring:url value="/customers?form" var="addContactsUrl"/>
+    <spring:url value="/contacts?form" var="addContactsUrl"/>
 
     <h1>${labelContactsList}</h1>
 
@@ -27,7 +27,6 @@
                 mtype: 'GET',
                 colNames:[
                     '${labelContactsName}',
-//                    '${labelContactsName}',
                     '${labelContactsPhone}',
                     '${labelContactsEmail}',
                     '${labelContactsBdate}',
@@ -35,7 +34,6 @@
                 ],
                 colModel :[
                     {name:'name', index:'name', width:100},
-//                    {name:'customers.name', index:'customers.name', width:100},
                     {name:'phone', index:'phone', width:100},
                     {name:'email', index:'email', width:100},
                     {name:'bdate', index:'bdate', width:100},
@@ -66,31 +64,9 @@
         });
     </script>
 
-    <!--<c:if test="${not empty contacts}">-->
-        <!--<table id="list">-->
-            <!--<thead>-->
-            <!--<tr>-->
-                <!--<th>Код</th>-->
-                <!--<th>Название</th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-            <!--<c:forEach items="${contacts}" var="contacts">-->
-                <!--<tr>-->
-                    <!--<td><a href="${ showContactsUrl }/${ contacts.id }">-->
-                        <!--${ contacts.id }</a></td>-->
-                    <!--&lt;!&ndash;<td>${contacts.id}</td>&ndash;&gt;-->
-                    <!--<td>${contacts.name}</td>-->
-                <!--</tr>-->
-            <!--</c:forEach>-->
-            <!--</tbody>-->
-        <!--</table>-->
-    <!--</c:if>-->
-
     <div class="btn-group" >
         <button class="btn" onclick="location.href='${addContactsUrl}'"><span class="glyphicon glyphicon-plus"></span>${labelContactsNew}</button>
     </div>
-
     <div>
         <table id="list"><tr><td/></tr></table>
     </div>

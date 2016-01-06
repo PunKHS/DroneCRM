@@ -12,8 +12,9 @@
     <spring:message code="label_orders_id" var="labelOrdersID"/>
     <spring:message code="label_orders_date" var="labelOrdersDate"/>
     <spring:message code="label_orders_number" var="labelOrdersNumber"/>
-    <spring:message code="label_orders_note" var="labelOrdersNote"/>
     <spring:message code="label_orders_customers" var="labelOrdersCustomers"/>
+    <spring:message code="label_orders_note" var="labelOrdersNote"/>
+    <spring:message code="label_orders_users" var="labelOrdersUsers"/>
 
     <spring:message code="label_orders_update" var="labelOrdersUpdate"/>
     <spring:message code="label_orders_delete" var="labelOrdersDelete"/>
@@ -54,6 +55,10 @@
             <tr>
                 <td>${labelOrdersNote}</td>
                 <td>${orders.note}</td>
+            </tr>
+            <tr>
+                <td>${labelOrdersUsers}</td>
+                <td>${orders.users.name}</td>
             </tr>
         </table>
 

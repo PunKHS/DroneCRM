@@ -27,6 +27,8 @@ public class Orders implements Serializable {
     public Set<Contracts> contracts = new HashSet<Contracts>();
 
     @Id
+    @GeneratedValue(generator = "orders_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "orders_seq", sequenceName = "orders_id_seq", allocationSize = 1)
     @Column(name = "id", nullable = false)
     public Long getId() {
         return id;

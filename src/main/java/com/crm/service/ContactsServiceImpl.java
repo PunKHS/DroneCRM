@@ -1,7 +1,9 @@
 package com.crm.service;
 
 import com.crm.model.Contacts;
+import com.crm.model.Customers;
 import com.crm.repository.ContactsRepository;
+import com.crm.repository.CustomersRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,7 @@ import java.util.List;
 @Service("contactsService")
 public class ContactsServiceImpl implements ContactsService {
     private ContactsRepository contactsRepository;
+    private CustomersRepository customersRepository;
 
     @Transactional(readOnly = true)
     public List<Contacts> findAll() {
@@ -40,8 +43,18 @@ public class ContactsServiceImpl implements ContactsService {
         return contactsRepository.findAll(pageable);
     }
 
+    @Transactional(readOnly = true)
+    public List<Customers> getAllCustomers() {
+        return Lists.newArrayList(customersRepository.findAll());
+    }
+
     @Autowired
     public void setContactsRepository(ContactsRepository contactsRepository) {
         this.contactsRepository = contactsRepository;
+    }
+
+    @Autowired
+    public void setCustomersRepository(CustomersRepository customersRepository) {
+        this.customersRepository = customersRepository;
     }
 }

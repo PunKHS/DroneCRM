@@ -2,6 +2,7 @@ package com.crm.service;
 
 import com.crm.model.Customers;
 import com.crm.model.Orders;
+import com.crm.model.Users;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,4 +20,6 @@ public interface OrdersService {
     Page<Orders> findAllByPage(Pageable pageable);
 
     List<Customers> getAllCustomers();
+
+    List<Users> getAllUsers();
 }

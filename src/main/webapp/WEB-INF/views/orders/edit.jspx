@@ -13,6 +13,7 @@
     <spring:message code="label_orders_number" var="labelOrdersNumber"/>
     <spring:message code="label_orders_customers" var="labelOrdersCustomers"/>
     <spring:message code="label_orders_note" var="labelOrdersNote"/>
+    <spring:message code="label_orders_users" var="labelOrdersUsers"/>
 
     <spring:message code="label_orders_new" var="labelOrdersNew"/>
     <spring:message code="label_orders_update" var="labelOrdersUpdate"/>
@@ -71,12 +72,22 @@
                     <td><form:textarea cols="60" rows="4" path="note" id="note"/></td>
                     <!--<td><form:input path="note"/></td>-->
                 </tr>
+                <tr>
+                    <td><form:label path="users.name">${labelOrdersUsers}*</form:label></td>
+                    <td>
+                        <form:select path="users.id" disabled="disabled">
+                            <form:options items="${users}" itemValue="key" itemLabel="value"/>
+                        </form:select>
+                    </td>
+                </tr>
             </table>
 
             <div>
                 <form:errors path="date" cssClass="error"/>
                 <form:errors path="number" cssClass="error"/>
+                <form:errors path="customers" cssClass="error"/>
                 <form:errors path="note" cssClass="error"/>
+                <form:errors path="users" cssClass="error"/>
             </div>
             <p/>
 

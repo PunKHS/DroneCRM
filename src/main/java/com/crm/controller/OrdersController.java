@@ -3,6 +3,7 @@ package com.crm.controller;
 import com.crm.grid.OrdersGrid;
 import com.crm.model.Customers;
 import com.crm.model.Orders;
+import com.crm.model.Users;
 import com.crm.service.CustomersService;
 import com.crm.service.OrdersService;
 import com.crm.service.UrlUtil;
@@ -85,7 +86,6 @@ public class OrdersController {
         uiModel.addAttribute("orders", ordersService.findById(id));
         try {
             Set<Map.Entry<Long, String>> customers;
-            //uiModel.addAttribute("customers", customersService.findById(id));
             List<Customers> customersList = ordersService.getAllCustomers();
             final Map<Long, String> customersMap = new HashMap<Long, String>();
             if (customersList != null && !customersList.isEmpty()) {
@@ -97,11 +97,23 @@ public class OrdersController {
             }
             customers = customersMap.entrySet();
             uiModel.addAttribute("customers", customers);
+
+            Set<Map.Entry<Long, String>> users;
+            List<Users> usersList = ordersService.getAllUsers();
+            final Map<Long, String> usersMap = new HashMap<Long, String>();
+            if (usersList != null && !usersList.isEmpty()) {
+                for (Users eachCustomer : usersList) {
+                    if (eachCustomer != null) {
+                        usersMap.put(eachCustomer.getId(), eachCustomer.getName());
+                    }
+                }
+            }
+            users = usersMap.entrySet();
+            uiModel.addAttribute("users", users);
+            
         } catch (Exception ex){
             logger.warn(ex.toString());
         }
-
-
         return "orders/update";
     }
 
@@ -127,6 +139,37 @@ public class OrdersController {
     public String createForm(Model uiModel) {
         Orders orders = new Orders();
         uiModel.addAttribute("orders", orders);
+
+        try {
+            Set<Map.Entry<Long, String>> customers;
+            List<Customers> customersList = ordersService.getAllCustomers();
+            final Map<Long, String> customersMap = new HashMap<Long, String>();
+            if (customersList != null && !customersList.isEmpty()) {
+                for (Customers eachCustomer : customersList) {
+                    if (eachCustomer != null) {
+                        customersMap.put(eachCustomer.getId(), eachCustomer.getName());
+                    }
+                }
+            }
+            customers = customersMap.entrySet();
+            uiModel.addAttribute("customers", customers);
+
+            Set<Map.Entry<Long, String>> users;
+            List<Users> usersList = ordersService.getAllUsers();
+            final Map<Long, String> usersMap = new HashMap<Long, String>();
+            if (usersList != null && !usersList.isEmpty()) {
+                for (Users eachCustomer : usersList) {
+                    if (eachCustomer != null) {
+                        usersMap.put(eachCustomer.getId(), eachCustomer.getName());
+                    }
+                }
+            }
+            users = usersMap.entrySet();
+            uiModel.addAttribute("users", users);
+
+        } catch (Exception ex){
+            logger.warn(ex.toString());
+        }
 
         return "orders/create";
     }

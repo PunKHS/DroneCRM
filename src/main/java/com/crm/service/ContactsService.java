@@ -1,6 +1,7 @@
 package com.crm.service;
 
 import com.crm.model.Contacts;
+import com.crm.model.Customers;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,4 +17,6 @@ public interface ContactsService {
     void delete(Long id);
 
     Page<Contacts> findAllByPage(Pageable pageable);
+
+    List<Customers> getAllCustomers();
 }
