@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_orderDetails_info" var="labelOrderDetailsInfo"/>
+
+    <spring:message code="label_orderDetails_id" var="labelOrderDetailsID"/>
+    <spring:message code="label_orderDetails_orders" var="labelOrderDetailsOrders"/>
+    <spring:message code="label_orderDetails_products" var="labelOrderDetailsProducts"/>
+    <spring:message code="label_orderDetails_qty" var="labelOrderDetailsQty"/>
+    <spring:message code="label_orderDetails_price" var="labelOrderDetailsPrice"/>
+    <spring:message code="label_orderDetails_total" var="labelOrderDetailsTotal"/>
+
+    <spring:message code="label_orderDetails_update" var="labelOrderDetailsUpdate"/>
+    <spring:message code="label_orderDetails_delete" var="labelOrderDetailsDelete"/>
+
+    <spring:url value="/orderDetails" var="editOrderDetailsUrl"/>
+    <spring:url value="/orderDetails/delete" var="deleteOrderDetailsUrl"/>
+
+    <h1>${labelOrderDetailsInfo}</h1>
+
+    <div class="btn-group" >
+        <button class="btn" onclick="location.href='${editOrderDetailsUrl}/${orderDetails.id}?form'"><span class="glyphicon glyphicon-pencil"></span>${labelOrderDetailsUpdate}</button>
+        <button class="btn" onclick="location.href='${deleteOrderDetailsUrl}/${orderDetails.id}?form'"><span class="glyphicon glyphicon-trash"></span>${labelOrderDetailsDelete}</button>
+    </div>
+
+    <div id="orderDetailsInfo">
+
+        <c:if test="${not empty message}">
+            <div id="message" class="${message.type}">${message.message}</div>
+        </c:if>
+
+        <table>
+            <tr>
+                <td>${labelOrderDetailsID}</td>
+                <td>${orderDetails.id}</td>
+            </tr>
+            <tr>
+                <td>${labelOrderDetailsOrders}</td>
+                <td>${orderDetails.orders.number} от ${orderDetails.orders.date}</td>
+            </tr>
+            <tr>
+                <td>${labelOrderDetailsProducts}</td>
+                <td>${orderDetails.products.name}</td>
+            </tr>
+            <tr>
+                <td>${labelOrderDetailsQty}</td>
+                <td>${orderDetails.qty}</td>
+            </tr>
+            <tr>
+                <td>${labelOrderDetailsPrice}</td>
+                <td>${orderDetails.price}</td>
+            </tr>
+            <tr>
+                <td>${labelOrderDetailsTotal}</td>
+                <td>${orderDetails.total}</td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -19,53 +19,39 @@
 
     <h1>${labelOrdersList}</h1>
     <script type="text/javascript">
-        $(function () {
+        $(function(){
             $("#list").jqGrid({
-                url: '${showOrdersUrl}/listgrid',
+                url:'${showOrdersUrl}/listgrid',
                 datatype: 'json',
                 mtype: 'GET',
-                colNames: [
+                colNames:[
                     '${labelOrdersDate}',
                     '${labelOrdersNumber}',
                     '${labelOrdersNote}'
                 ],
-                colModel: [
-                    {name: 'date', index: 'date', width: 200},
-                    {name: 'number', index: 'number', width: 200},
-                    {name: 'note', index: 'note', width: 250}
+                colModel :[
+                    {name:'date', index:'date', width:200},
+                    {name:'number', index:'number', width:200},
+                    {name:'note', index:'note', width:250}
                 ],
-                jsonReader: {
-                    root: "ordersData",
+                jsonReader : {
+                    root:"ordersData",
                     page: "currentPage",
                     total: "totalPages",
                     records: "totalRecords",
                     repeatitems: false,
                     id: "id"
-//                    cell: "orderDetails",
-//                    subgrid: {
-//                        root: "ordersData",
-//                        repeatitems: true,
-//                        cell: "orderDetails"
-//                    }
                 },
                 pager: '#pager',
-                rowNum: 10,
-                rowList: [10, 20, 30],
-                sortname: 'date',
+                rowNum:10,
+                rowList:[10,20,30],
+                sortname: 'id',
                 sortorder: 'desc',
                 viewrecords: true,
                 gridview: true,
                 height: 250,
                 width: 650,
-//                subGrid: true,
-//                subGridModel : [
-//                    {
-//                        name  : ['id', 'qty', 'price', 'total'],
-//                        width : [55, 20, 80, 80],
-//                        align : ['left','left','right','right'],
-//                        params: ['orderDetails']
-//                    }
-//                ]
+                //caption: '${labelOrdersList}',
                 onSelectRow: function(id){
                     document.location.href ="${showOrdersUrl}/" + id;
                 }
@@ -73,16 +59,31 @@
         });
     </script>
 
-    <div class="btn-group">
-        <button class="btn" onclick="location.href='${addOrdersUrl}'"><span
-                class="glyphicon glyphicon-plus"></span>${labelOrdersNew}</button>
+    <!--<c:if test="${not empty orders}">-->
+        <!--<table id="list">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Код</th>-->
+                <!--<th>Название</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<c:forEach items="${orders}" var="orders">-->
+                <!--<tr>-->
+                    <!--<td><a href="${ showOrdersUrl }/${ orders.id }">-->
+                        <!--${ orders.id }</a></td>-->
+                    <!--&lt;!&ndash;<td>${orders.id}</td>&ndash;&gt;-->
+                    <!--<td>${orders.name}</td>-->
+                <!--</tr>-->
+            <!--</c:forEach>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</c:if>-->
+    <div class="btn-group" >
+        <button class="btn" onclick="location.href='${addOrdersUrl}'"><span class="glyphicon glyphicon-plus"></span>${labelOrdersNew}</button>
     </div>
     <div>
-        <table id="list">
-            <tr>
-                <td/>
-            </tr>
-        </table>
+        <table id="list"><tr><td/></tr></table>
     </div>
     <div id="pager"></div>
 </div>

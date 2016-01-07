@@ -22,6 +22,13 @@
     <spring:url value="/orders" var="editOrdersUrl"/>
     <spring:url value="/orders/delete" var="deleteOrdersUrl"/>
 
+
+    <spring:message code="label_orderDetails_list" var="labelOrderDetailsList"/>
+    <spring:message code="label_orderDetails_qty" var="labelOrderDetailsQty"/>
+    <spring:message code="label_orderDetails_new" var="labelOrderDetailsNew"/>
+    <spring:url value="/orderDetails/" var="showOrderDetailsUrl"/>
+    <spring:url value="/orderDetails?form" var="addOrderDetailsUrl"/>
+
     <h1>${labelOrdersInfo}</h1>
 
     <div class="btn-group" >
@@ -62,7 +69,47 @@
             </tr>
         </table>
 
-        <!--<a href="${editOrdersUrl}/${orders.id}?form">${labelOrdersUpdate}</a>-->
-        <!--<a href="${deleteOrdersUrl}/${orders.id}?form">${labelOrdersDelete}</a>-->
+        <h1>${labelOrderDetailsList}</h1>
+
+        <div>
+            <table id="list"><tr><td/></tr></table>
+        </div>
+
+        <script type="text/javascript">
+            $(function(){
+                $("#list").jqGrid({
+                    url:'${showOrderDetailsUrl}/listgrid + ${orders.id}',
+                    datatype: 'json',
+                    mtype: 'GET',
+                    colNames:[
+                        '${labelOrderDetailsQty}'
+                    ],
+                    colModel :[
+                        {name:'qty', index:'qty', width:500}
+                    ],
+                    jsonReader : {
+                        root:"orderDetailsData",
+                        repeatitems: false,
+                        id: "id"
+                    },
+                    rowNum:10,
+                    rowList:[10,20,30],
+                    sortname: 'qty',
+                    sortorder: 'asc',
+                    viewrecords: true,
+                    gridview: true,
+                    height:100,
+                    width: 700,
+                    //caption: '${labelOrderDetailsList}',
+
+                    onSelectRow: function(id){
+                        document.location.href ="${showOrderDetailsUrl}/" + id;
+                    }
+                });
+            });
+        </script>
+
+
+
     </div>
 </div>

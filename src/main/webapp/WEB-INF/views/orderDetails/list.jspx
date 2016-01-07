@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:spring="http://www.springframework.org/tags"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_orderDetails_list" var="labelOrderDetailsList"/>
+    <spring:message code="label_orderDetails_id" var="labelOrderDetailsID"/>
+    <spring:message code="label_orderDetails_qty" var="labelOrderDetailsQty"/>
+    <spring:message code="label_orderDetails_new" var="labelOrderDetailsNew"/>
+    <spring:url value="/orderDetails/" var="showOrderDetailsUrl"/>
+    <spring:url value="/orderDetails?form" var="addOrderDetailsUrl"/>
+
+    <h1>${labelOrderDetailsList}</h1>
+    <script type="text/javascript">
+        $(function(){
+            $("#list").jqGrid({
+                url:'${showOrderDetailsUrl}/listgrid',
+                datatype: 'json',
+                mtype: 'GET',
+                colNames:[
+                    '${labelOrderDetailsQty}',
+                    '${labelOrderDetailsQty}'
+                ],
+                colModel :[
+                    {name:'qty', index:'qty', width:500},
+                    {name:'orders.number', index:'orders.number', width:500}
+                ],
+                jsonReader : {
+                    root:"orderDetailsData",
+                    page: "currentPage",
+                    total: "totalPages",
+                    records: "totalRecords",
+                    repeatitems: false,
+                    id: "id",
+                    subgrid: {
+                        root:"rows",
+                        repeatitems: true,
+                        cell:"cell"
+                    }
+                },
+                pager: '#pager',
+                rowNum:10,
+                rowList:[10,20,30],
+                sortname: 'qty',
+                sortorder: 'asc',
+                viewrecords: true,
+                gridview: true,
+                height: 250,
+                width: 650,
+                //caption: '${labelOrderDetailsList}',
+
+                onSelectRow: function(id){
+                    document.location.href ="${showOrderDetailsUrl}/" + id;
+                }
+            });
+        });
+    </script>
+
+    <div class="btn-group" >
+        <button class="btn" onclick="location.href='${addOrderDetailsUrl}'"><span class="glyphicon glyphicon-plus"></span>${labelOrderDetailsNew}</button>
+    </div>
+    <div>
+        <table id="list"><tr><td/></tr></table>
+    </div>
+    <div id="pager"></div>
+</div>

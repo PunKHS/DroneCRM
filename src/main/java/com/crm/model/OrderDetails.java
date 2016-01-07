@@ -64,7 +64,7 @@ public class OrderDetails implements Serializable {
     }
 
     @Basic
-    @Column(name = "price", nullable = false, precision = 2)
+    @Column(name = "price", nullable = true, precision = 2)
     public BigDecimal getPrice() {
         return price;
     }

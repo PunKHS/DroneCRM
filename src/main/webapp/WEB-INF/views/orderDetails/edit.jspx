@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_orderDetails_id" var="labelOrderDetailsID"/>
+    <spring:message code="label_orderDetails_orders" var="labelOrderDetailsOrders"/>
+    <spring:message code="label_orderDetails_products" var="labelOrderDetailsProducts"/>
+    <spring:message code="label_orderDetails_qty" var="labelOrderDetailsQty"/>
+    <spring:message code="label_orderDetails_price" var="labelOrderDetailsPrice"/>
+    <spring:message code="label_orderDetails_total" var="labelOrderDetailsTotal"/>
+
+    <spring:message code="label_orderDetails_new" var="labelOrderDetailsNew"/>
+    <spring:message code="label_orderDetails_update" var="labelOrderDetailsUpdate"/>
+
+    <!-- Проверка редактирование/обновление -->
+    <spring:eval expression="orderDetails.id == null ? labelOrderDetailsNew:labelOrderDetailsUpdate" var="formTitle"/>
+    <!--<spring:eval expression="labelOrderDetailsUpdate" var="formTitle"/>-->
+
+    <h1>${formTitle}</h1>
+
+    <div id="orderDetailsUpdate">
+        <!-- Связь формы с атрибутом модели -->
+        <form:form modelAttribute="orderDetails" id="orderDetailsUpdateForm" method="POST">
+
+            <c:if test="${not empty message}">
+                <div id="message" class="${message.type}">${message.message}</div>
+            </c:if>
+
+            <table>
+                <tr>
+                    <td><form:label path="products.name">${labelOrderDetailsProducts}*</form:label></td>
+                    <td>
+                        <form:select path="products.id">
+                            <form:options items="${products}" itemValue="key" itemLabel="value"/>
+                        </form:select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><form:label path="qty">${labelOrderDetailsQty}*</form:label></td>
+                    <td><form:input path="qty"/></td>
+                </tr>
+            </table>
+
+            <div>
+                <form:errors path="products.name" cssClass="error"/>
+                <form:errors path="qty" cssClass="error"/>
+            </div>
+            <p/>
+
+            <button type="submit">Save</button>
+            <button type="reset">Reset</button>
+
+        </form:form>
+    </div>
+</div>
