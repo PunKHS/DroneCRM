@@ -1,6 +1,7 @@
 package com.crm.service;
 
 import com.crm.model.OrderDetails;
+import com.crm.model.Orders;
 import com.crm.model.Products;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,4 +22,6 @@ public interface OrderDetailsService {
     List<OrderDetails> findByOrdersId(Long id);
 
     List<Products> getAllProducts();
+
+    List<Orders> getAllOrders();
 }

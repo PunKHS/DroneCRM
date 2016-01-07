@@ -1,8 +1,10 @@
 package com.crm.service;
 
 import com.crm.model.OrderDetails;
+import com.crm.model.Orders;
 import com.crm.model.Products;
 import com.crm.repository.OrderDetailsRepository;
+import com.crm.repository.OrdersRepository;
 import com.crm.repository.ProductsRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import java.util.List;
 public class OrderDetailsServiceImpl implements OrderDetailsService {
     private OrderDetailsRepository orderDetailsRepository;
     private ProductsRepository productsRepository;
+    private OrdersRepository ordersRepository;
 
     @Transactional(readOnly = true)
     public List<OrderDetails> findAll() {
@@ -53,6 +56,10 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
         return Lists.newArrayList(productsRepository.findAll());
     }
 
+    public List<Orders> getAllOrders() {
+        return Lists.newArrayList(ordersRepository.findAll());
+    }
+
     @Autowired
     public void setOrderDetailsRepository(OrderDetailsRepository orderDetailsRepository) {
         this.orderDetailsRepository = orderDetailsRepository;
@@ -61,6 +68,11 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     @Autowired
     public void setProductsRepository(ProductsRepository productsRepository) {
         this.productsRepository = productsRepository;
+    }
+
+    @Autowired
+    public void setOrdersRepository(OrdersRepository ordersRepository) {
+        this.ordersRepository = ordersRepository;
     }
 }
 

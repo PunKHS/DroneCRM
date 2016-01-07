@@ -3,6 +3,7 @@ package com.crm.controller;
 import com.crm.grid.OrderDetailsGrid;
 import com.crm.model.Customers;
 import com.crm.model.OrderDetails;
+import com.crm.model.Orders;
 import com.crm.model.Products;
 import com.crm.service.OrderDetailsService;
 import com.crm.service.UrlUtil;
@@ -65,7 +66,8 @@ public class OrderDetailsController {
                          HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes,
                          Locale locale) {
         logger.info("Updating orderDetails");
-        if (bindingResult.hasErrors()) {
+        try{if (bindingResult.hasErrors()) {
+            logger.warn("!!!!11111");
             uiModel.addAttribute("message", new Message("error",
                     messageSource.getMessage("orderDetails_save_fail", new Object[]{}, locale)));
             uiModel.addAttribute("orderDetails", orderDetails);
@@ -75,9 +77,13 @@ public class OrderDetailsController {
         uiModel.asMap().clear();
         redirectAttributes.addFlashAttribute("message", new Message("success",
                 messageSource.getMessage("orderDetails_save_success", new Object[]{}, locale)));
-        orderDetailsService.save(orderDetails);
-        return "redirect:/orderDetails/" + UrlUtil.encodeUrlPathSegment(orderDetails.getId().toString(),
-                httpServletRequest);
+        orderDetailsService.save(orderDetails);}
+        catch (Exception ex){
+            logger.info(ex.toString());
+        }
+//        return "redirect:/orderDetails/" + UrlUtil.encodeUrlPathSegment(orderDetails.getId().toString(),
+//                httpServletRequest);
+        return "redirect:/orders/";
     }
 
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
@@ -96,6 +102,22 @@ public class OrderDetailsController {
             }
             products = productsMap.entrySet();
             uiModel.addAttribute("products", products);
+        } catch (Exception ex){
+            logger.warn(ex.toString());
+        }
+        try {
+            Set<Map.Entry<Long, String>> orders;
+            List<Orders> ordersList = orderDetailsService.getAllOrders();
+            final Map<Long, String> ordersMap = new HashMap<Long, String>();
+            if (ordersList != null && !ordersList.isEmpty()) {
+                for (Orders eachOrders : ordersList) {
+                    if (eachOrders != null) {
+                        ordersMap.put(eachOrders.getId(), eachOrders.getNumber());
+                    }
+                }
+            }
+            orders = ordersMap.entrySet();
+            uiModel.addAttribute("orders", orders);
         } catch (Exception ex){
             logger.warn(ex.toString());
         }
@@ -137,6 +159,22 @@ public class OrderDetailsController {
             }
             products = productsMap.entrySet();
             uiModel.addAttribute("products", products);
+        } catch (Exception ex){
+            logger.warn(ex.toString());
+        }
+        try {
+            Set<Map.Entry<Long, String>> orders;
+            List<Orders> ordersList = orderDetailsService.getAllOrders();
+            final Map<Long, String> ordersMap = new HashMap<Long, String>();
+            if (ordersList != null && !ordersList.isEmpty()) {
+                for (Orders eachOrders : ordersList) {
+                    if (eachOrders != null) {
+                        ordersMap.put(eachOrders.getId(), eachOrders.getNumber());
+                    }
+                }
+            }
+            orders = ordersMap.entrySet();
+            uiModel.addAttribute("orders", orders);
         } catch (Exception ex){
             logger.warn(ex.toString());
         }

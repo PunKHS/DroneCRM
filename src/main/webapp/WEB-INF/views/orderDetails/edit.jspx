@@ -35,6 +35,14 @@
 
             <table>
                 <tr>
+                    <td><form:label path="orders.number">${labelOrderDetailsOrders}*</form:label></td>
+                    <td>
+                        <form:select path="orders.id">
+                            <form:options items="${orders}" itemValue="key" itemLabel="value"/>
+                        </form:select>
+                    </td>
+                </tr>
+                <tr>
                     <td><form:label path="products.name">${labelOrderDetailsProducts}*</form:label></td>
                     <td>
                         <form:select path="products.id">
@@ -46,11 +54,21 @@
                     <td><form:label path="qty">${labelOrderDetailsQty}*</form:label></td>
                     <td><form:input path="qty"/></td>
                 </tr>
+                <tr>
+                    <td><form:label path="price">${labelOrderDetailsPrice}*</form:label></td>
+                    <td><form:input path="price"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="total">${labelOrderDetailsTotal}*</form:label></td>
+                    <td><form:input path="total"/></td>
+                </tr>
             </table>
 
             <div>
                 <form:errors path="products.name" cssClass="error"/>
                 <form:errors path="qty" cssClass="error"/>
+                <form:errors path="price" cssClass="error"/>
+                <form:errors path="total" cssClass="error"/>
             </div>
             <p/>
 
